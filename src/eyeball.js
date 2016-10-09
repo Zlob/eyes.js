@@ -15,7 +15,7 @@ define(function() {
         '</svg>'
     ].join("");
     
-    var Eyeball = function(handlerNode, options) {
+    var Eyeball = function (handlerNode, options) {
         var self = this;
                         
         this._handlerNode = handlerNode;
@@ -72,38 +72,40 @@ define(function() {
     
     Eyeball.prototype._trackByAngle = function (angle, shift) {
         var shift = shift || this.options['eyeballShift'];
-        
-        //eye center
-        var eyeballNodePosition = this.eyeballNode.getBoundingClientRect();
-        var x0 = eyeballNodePosition.left + eyeballNodePosition.width/2;
-        var y0 = eyeballNodePosition.top  + eyeballNodePosition.height/2;    
-        
+                
         var x = 60 + shift * Math.cos(angle);
         var y = 60 + shift * Math.sin(angle);
         
-        var eyeballPath = this.eyeballNode.querySelector("[name=eyeball]");
-        eyeballPath.setAttribute("cx", x);
-        eyeballPath.setAttribute("cy", y);
+        this._setEyeballCoordinates(x,y);
     }
     
     Eyeball.prototype.trackByCoordinate = function (x1, y1, shift) {
         var shift = shift || this.options['eyeballShift'];
               
         //eye center
-        var eyeballNodePosition = this.eyeballNode.getBoundingClientRect();
-        var x0 = eyeballNodePosition.left + eyeballNodePosition.width/2;
-        var y0 = eyeballNodePosition.top  + eyeballNodePosition.height/2;              
+        var eyeCenter = this._getEyeballCoordinates();          
            
         //distance between eye center and point
-        var d = Math.sqrt(Math.pow(x0-x1, 2) + Math.pow(y0-y1, 2));
+        var d = Math.sqrt(Math.pow(eyeCenter.x - x1, 2) + Math.pow(eyeCenter.y - y1, 2));
         
         //eyeball position
-        var x = 60 - (x0-x1) / d * shift;
-        var y = 60 - (y0-y1) / d * shift;
+        var x = 60 - (eyeCenter.x - x1) / d * shift;
+        var y = 60 - (eyeCenter.y - y1) / d * shift;
         
+        this._setEyeballCoordinates(x,y);
+    }
+    
+    Eyeball.prototype._setEyeballCoordinates = function (x, y) {
         var eyeballPath = this.eyeballNode.querySelector("[name=eyeball]");
         eyeballPath.setAttribute("cx", x);
-        eyeballPath.setAttribute("cy", y);
+        eyeballPath.setAttribute("cy", y)
+    }
+    
+    Eyeball.prototype._getEyeballCoordinates = function () {
+        var eyeballNodePosition = this.eyeballNode.getBoundingClientRect();
+        var x = eyeballNodePosition.left + eyeballNodePosition.width/2;
+        var y = eyeballNodePosition.top  + eyeballNodePosition.height/2;
+        return { x: x, y: y };
     }
         
     return Eyeball;

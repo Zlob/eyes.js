@@ -5,7 +5,7 @@
 * Time: 03:52 PM
 * To change this template use Tools | Templates.
 */
-define(['eyeball'], function(Eyeball) {
+define(['eyeball', 'topEyelid'], function(Eyeball, TopEyelid) {
     
     var SVG_HTML_TEMPLATE = [
         '<svg width="50" height="50" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">',
@@ -38,6 +38,10 @@ define(['eyeball'], function(Eyeball) {
             //eyeball options
             "eyeballSize"       : 12,
             "eyeballShift"      : 20,
+            //top eyelid options
+            "topEyelidColor"        : "white",
+            "topEyelidBorderColor"  : "#000000",
+            'topEyelidBorderSize'   : '5'
         };
         
         // Replace default optinos
@@ -59,27 +63,29 @@ define(['eyeball'], function(Eyeball) {
         this._handlerNode.style.left = parentPostion["left"] + (x + pageXOffset) + "px";
         this._handlerNode.style.top  = parentPostion["top"]  + (y + pageYOffset) + "px";
     }
-        
-    Eye.prototype.track = function (options)  {
-        this._eyeball.track.apply(this._eyeball, arguments);
-    }
-        
+                
     Eye.prototype._render = function () {
         var self = this;
         
         this._handlerNode = this._create_handlerNode(this.options["size"]);
         this._eyeNode = this._createEyeNode();
         
-        this._eyeball = new Eyeball(this._handlerNode, {
+        this.eyeball = new Eyeball(this._handlerNode, {
             "eyeballSize"   : this.options['eyeballSize'],
             "eyeballShift"  : this.options['eyeballShift'],
+        });
+        
+        this.topEyelid = new TopEyelid(this._handlerNode, {
+            "color"       : this.options['topEyelidColor'],
+            "borderColor" : this.options['topEyelidBorderColor'],
+            "borderSize"  : this.options['topEyelidBorderSize'],
         });
                 
         document.body.appendChild( this._handlerNode );
 
         this.move( this.options.x, this.options.y );             
         
-//         Set visible AFTER change position
+        //Set visible AFTER change position
         this._handlerNode.style.display = "block";   
     }
     

@@ -24,14 +24,61 @@ require( ['eyeAnimator'], function( EyeAnimator ){
             size          : 50,
             color         : "red",
             borderColor   : "brown",
-            borderSize    : 10,
+            borderSize    : 5,
             "eyeballSize"       : 12,
             "eyeballShift"      : 10,
         });
     
     window.addEventListener("mousemove", function( e ) {
-                firstEye.track({x: e.x, y: e.y, shift: 10});
+                firstEye.eyeball.track({x: e.x, y: e.y, shift: 10});
             }, false);
+    
+    
+    var secondEye = animator.createEye(
+        '#img1',
+        {
+            x : 100,
+            y : 30,
+            size          : 50,
+            color         : "red",
+            borderColor   : "brown",
+            borderSize    : 5,
+            "eyeballSize"       : 12,
+            "eyeballShift"      : 10,
+        });
+    
+    var angle = 1;
+    window.addEventListener("mousemove", function( e ) {
+                secondEye.eyeball.track({angle: angle++, shift: 10});
+    }, false);
+    
+    
+    var thirdEye = animator.createEye(
+        '#img2',
+        {
+            x : 100,
+            y : 30,
+            size          : 50,
+            color         : "red",
+            borderColor   : "brown",
+            borderSize    : 5,
+            eyeballSize       : 12,
+            eyeballShift      : 10,
+        });
+    
+    var topEyelidSize = 0;
+    var topEyelidBottomArc = 0;
+    window.addEventListener("mousemove", function( e ) {       
+        topEyelidBottomArc+=0.001;
+        console.log(topEyelidBottomArc);
+        topEyelidSize+=0.001;
+        
+        thirdEye.topEyelid.change({
+            size: topEyelidSize,
+            bottomArc: topEyelidBottomArc
+        });
+    }, false);
+    
 //     setInterval(function()  {
 //         firstEye.move(100,100)
 //     }, 1000)
