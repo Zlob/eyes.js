@@ -7,10 +7,27 @@
 */
 define(['eye'], function(Eye) {
     
-    var eyeAnimator = function() {
-        this.createEye = function(selector, options) {
-            return new Eye(selector, options);        
-        }        
+    var eyeAnimator = function () {
+        var self = this;
+        
+        var eyes = [];
+        
+        this.createEye = function (selector, options) {
+            var eye = new Eye(selector, options);
+            eyes.push(eye);
+            return eye
+        }
+        
+        this._resize = function () {
+            for( var idx in eyes ) {
+                eyes[idx].moveToPosition();
+            }
+        }
+        
+        window.addEventListener("resize", function( e ) {
+            self._resize();
+        }, false);
+        
     }
     
     return eyeAnimator;

@@ -5,12 +5,12 @@
 * Time: 03:52 PM
 * To change this template use Tools | Templates.
 */
-define(function() {
+define(['eyeball'], function(Eyeball) {
     
     var SVG_HTML_TEMPLATE = [
         '<svg width="50" height="50" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">',
         ' <g>',
-        '  <circle name="eye"   fill="#ffffff" stroke="#000000" stroke-width="5" cx="60" cy="60" r="50" />',
+        '  <circle name="eye" fill="#ffffff" stroke="#000000" stroke-width="5" cx="60" cy="60" r="50" />',
         ' </g>',
         '</svg>'
     ].join("");
@@ -34,7 +34,10 @@ define(function() {
             "size"          : 50,
             "color"         : "#FFFFFF",
             "borderColor"   : "#000000",
-            'borderSize'    : '5'
+            'borderSize'    : '5',
+            //eyeball options
+            "eyeballSize"       : 12,
+            "eyeballShift"      : 20,
         };
         
         // Replace default optinos
@@ -45,52 +48,72 @@ define(function() {
         this._render();
     }
     
-    // Relactive to parent image
-    Eye.prototype.move = function( x, y ) {
-        var parentPostion = this._element.getBoundingClientRect();        
-        this.handlerNode.style.position = "absolute";
-        this.handlerNode.style.left = parentPostion["left"] + (x + pageXOffset) + "px";
-        this.handlerNode.style.top  = parentPostion["top"]  + (y + pageYOffset) + "px";
+    Eye.prototype.moveToPosition = function ( ) {
+        this.move( this.options["x"], this.options["y"] );  
     }
-    
-    Eye.prototype._render = function() {
+        
+    // Relactive to parent image
+    Eye.prototype.move = function ( x, y ) {
+        var parentPostion = this._element.getBoundingClientRect();        
+        this._handlerNode.style.position = "absolute";
+        this._handlerNode.style.left = parentPostion["left"] + (x + pageXOffset) + "px";
+        this._handlerNode.style.top  = parentPostion["top"]  + (y + pageYOffset) + "px";
+    }
+        
+    Eye.prototype.track = function (options)  {
+        this._eyeball.track.apply(this._eyeball, arguments);
+    }
+        
+    Eye.prototype._render = function () {
         var self = this;
         
-        this.handlerNode = this._createHandlerNode(this.options["size"]);
-        this.eyeNode = this._createEyeNode(this.handlerNode, this.options["size"]);
+        this._handlerNode = this._create_handlerNode(this.options["size"]);
+        this._eyeNode = this._createEyeNode();
+        
+        this._eyeball = new Eyeball(this._handlerNode, {
+            "eyeballSize"   : this.options['eyeballSize'],
+            "eyeballShift"  : this.options['eyeballShift'],
+        });
                 
-        document.body.appendChild( this.handlerNode );
+        document.body.appendChild( this._handlerNode );
 
         this.move( this.options.x, this.options.y );             
         
 //         Set visible AFTER change position
-        this.handlerNode.style.display = "block";   
+        this._handlerNode.style.display = "block";   
     }
     
-    Eye.prototype._createHandlerNode = function (size) {
-        //create node
-        var handlerNode = document.createElement("object");
-        //hide node
-        handlerNode.style.display  = "none";
-        //set params
-        handlerNode.style.position = "absolute";    
-        handlerNode.setAttribute("width", size);
-        handlerNode.setAttribute("height", size);
-        return handlerNode;
+    Eye.prototype._create_handlerNode = function (size) {
+        var _handlerNode = document.createElement("object");
+        
+        _handlerNode.style.display  = "none";
+        _handlerNode.style.position = "absolute";    
+        _handlerNode.setAttribute("width", size);
+        _handlerNode.setAttribute("height", size);
+        
+        return _handlerNode;
     }
     
-    Eye.prototype._createEyeNode = function (parent, size, color, borderColor, borderSize) {
-        //create node
+    Eye.prototype._createEyeNode = function () {
         var eyeNode = document.createElement("object");
-        //set params
+        
         eyeNode.style.position = "absolute";    
-        eyeNode.innerHTML = SVG_HTML_TEMPLATE;        
-        eyeNode.setAttribute("width", size);
-        eyeNode.setAttribute("height", size);        
-        eyeNode.setAttribute("fill", color);
-        eyeNode.setAttribute("stroke", borderColor);
-        eyeNode.setAttribute("stroke-width", borderSize);        
-        parent.appendChild(eyeNode);        
+        eyeNode.innerHTML = SVG_HTML_TEMPLATE;
+        this._setNodeAttributes(eyeNode);
+        this._handlerNode.appendChild(eyeNode); 
+        
+        return eyeNode;
+    }
+    
+    Eye.prototype._setNodeAttributes = function (eyeNode) {
+        var eyePath = eyeNode.querySelector("[name=eye]");
+        
+        eyePath.setAttribute("width", this.options['size']);
+        eyePath.setAttribute("height", this.options['size']);        
+        eyePath.setAttribute("fill", this.options['color']);
+        eyePath.setAttribute("stroke", this.options['borderColor']);
+        eyePath.setAttribute("stroke-width", this.options['borderSize']);
+        
         return eyeNode;
     }
     
