@@ -8,9 +8,9 @@
 define(['eyeball', 'topEyelid'], function(Eyeball, TopEyelid) {
     
     var SVG_HTML_TEMPLATE = [
-        '<svg width="50" height="50" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">',
+        '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
         ' <g>',
-        '  <circle name="eye" fill="#ffffff" stroke="#000000" stroke-width="5" cx="60" cy="60" r="50" />',
+        '  <circle name="eye" fill="#ffffff" stroke="#000000" stroke-width="5" cx="90" cy="90" r="50" />',
         ' </g>',
         '</svg>'
     ].join("");
@@ -29,19 +29,21 @@ define(['eyeball', 'topEyelid'], function(Eyeball, TopEyelid) {
         
         // Default options
         this.options = {
-            "x"             : 0,
-            "y"             : 0,
-            "size"          : 50,
-            "color"         : "#FFFFFF",
-            "borderColor"   : "#000000",
-            'borderSize'    : '5',
+            x             : 0,
+            y             : 0,
+            size          : 50,
+            color         : "#FFFFFF",
+            borderColor   : "#000000",
+            borderSize    : '5',
             //eyeball options
-            "eyeballSize"       : 12,
-            "eyeballShift"      : 20,
+            eyeballSize       : 12,
+            eyeballShift      : 20,
             //top eyelid options
-            "topEyelidColor"        : "white",
-            "topEyelidBorderColor"  : "#000000",
-            'topEyelidBorderSize'   : '5'
+            topEyelidColor              : "white",
+            topEyelidBorderColor        : "#000000",
+            topEyelidBorderSize         : '5',
+            topEyelidEyelashesStyle     : 'none',
+            topEyelidEyelashesPosition  : 'none',
         };
         
         // Replace default optinos
@@ -76,9 +78,11 @@ define(['eyeball', 'topEyelid'], function(Eyeball, TopEyelid) {
         });
         
         this.topEyelid = new TopEyelid(this._handlerNode, {
-            "color"       : this.options['topEyelidColor'],
-            "borderColor" : this.options['topEyelidBorderColor'],
-            "borderSize"  : this.options['topEyelidBorderSize'],
+            "color"             : this.options['topEyelidColor'],
+            "borderColor"       : this.options['topEyelidBorderColor'],
+            "borderSize"        : this.options['topEyelidBorderSize'],
+            "eyelashesStyle"    : this.options['topEyelidEyelashesStyle'],
+            "eyelashesPosition" : this.options['topEyelidEyelashesPosition'],
         });
                 
         document.body.appendChild( this._handlerNode );

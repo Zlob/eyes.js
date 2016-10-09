@@ -7,9 +7,10 @@
 */
 define(function() {
     var SVG_HTML_TEMPLATE = [
-        '<svg width="50" height="50" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">',
+        '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
         ' <g>',
-        '  <path name="top-eyelid" stroke-width="5" stroke="#000000" fill="yellow" d="m60,10a50,50 0 1 0 0,0"/>',
+        '  <path name="top-eyelid"/>',
+        '  <path name="top-eyelashes"/>',
         ' </g>',
         '</svg>'
     ].join("");
@@ -24,7 +25,9 @@ define(function() {
             borderColor             : '#000000',
             borderSize              : 5,
             bottomArcRadius         : 0,
-            bottomArcRadiusSweep    : 0.1,
+            bottomArcRadiusSweep    : 0,
+            eyelashesStyle          : 'none',
+            eyelashesPosition       : 'none',
             size                    : 0.1            
         };
                 
@@ -44,6 +47,8 @@ define(function() {
         this.options.color = options.color || this.options.color;
         this.options.borderColor = options.borderColor || this.options.borderColor;
         this.options.borderSize = options.borderSize || this.options.borderSize;
+        this.options.eyelashesStyle = options.eyelashesStyle || this.options.eyelashesStyle;
+        this.options.eyelashesPosition = options.eyelashesPosition || this.options.eyelashesPosition;
         this._setBottomArcRadius(options.bottomArcRadius || this.options.bottomArcRadius);
         this._setSize(options.size || this.options.size);   
     }
@@ -99,16 +104,25 @@ define(function() {
     TopEyelid.prototype._createPath = function ( ) {
         var angle = (Math.PI/2) - (Math.PI * this.options.size);
                 
-        var startPointX = 60 - (Math.cos(angle) * 50 );
-        var startPointY = 60 - (Math.sin(angle) * 50 );
+        var startPointX = 90 - (Math.cos(angle) * 50 );
+        var startPointY = 90 - (Math.sin(angle) * 50 );
         
-        var endPointX = (60 + 60 - startPointX);
+        var endPointX = (90 + 90 - startPointX);
         var endPointY = startPointY;
         var d = "";
         //left start point
         d = d + "M"+startPointX+","+startPointY;
         d = this._createTopArc(d, endPointX, endPointY);
-        d = this._createBottomArc(d, startPointX, startPointY);                
+        d = this._createBottomArc(d, startPointX, startPointY);
+        if (this.options.eyelashesStyle == 'loise') {
+            if (this.options.eyelashesPosition == 'right') {
+                d = this._createEyelashes(d, endPointX, endPointY, this.options.eyelashesPosition);            
+            }
+            else {
+                d = this._createEyelashes(d, startPointX, startPointY, this.options.eyelashesPosition);  
+            }
+        }
+        
         
         d = d + 'z'; //close path
         return d;
@@ -126,8 +140,8 @@ define(function() {
     TopEyelid.prototype._createBottomArc = function (d, endPointX, endPointY) {
         if (this.options.bottomArcRadius != 0){
             //bottom arc
-            var arcRadius = 50/this.options.bottomArcRadius;
-            d = d + " A" + arcRadius + "," + arcRadius + " 0 0 0 ";
+            var arcRadius = 50 / this.options.bottomArcRadius;
+            d = d + " A" + arcRadius + "," + arcRadius + " 0 0 " + this.options.bottomArcRadiusSweep;
             //back to start point
             d = d + endPointX + "," + endPointY;
         }
@@ -138,6 +152,26 @@ define(function() {
         return d;
     }
     
+    
+    TopEyelid.prototype._createEyelashes = function (d, x, y, position) {
+        if (position == 'right') {
+            d += " M " + x + "," + y;
+            d += " q5,0 15,-15";
+            d += " M " + x + "," + y;
+            d += " q20,0 25,-10";
+            d +=  "M " + x + "," + y;
+        }
+        else if (position == 'left'){
+            d += " M " + x + "," + y;
+            d += " q-5,0 -15,-15";
+            d += " M " + x + "," + y;
+            d += " q-20,0 -25,-10";
+            d +=  "M " + x + "," + y;
+        }
+        return d;
+    }
+
+        
     
     return TopEyelid;
 });

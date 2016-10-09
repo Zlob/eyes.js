@@ -64,6 +64,8 @@ require( ['eyeAnimator'], function( EyeAnimator ){
             borderSize    : 5,
             eyeballSize       : 12,
             eyeballShift      : 10,
+            topEyelidEyelashesStyle     : 'loise',
+            topEyelidEyelashesPosition  : 'left',
         });
     
     var topEyelidSize = 0;
@@ -75,7 +77,7 @@ require( ['eyeAnimator'], function( EyeAnimator ){
         
         thirdEye.topEyelid.change({
             size: topEyelidSize,
-            bottomArc: topEyelidBottomArc
+            bottomArcRadius: topEyelidBottomArc
         });
     }, false);
     

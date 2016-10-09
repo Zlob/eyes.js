@@ -8,9 +8,9 @@
 define(function() {
     
     var SVG_HTML_TEMPLATE = [
-        '<svg width="50" height="50" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">',
+        '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
         ' <g>',
-        '  <circle name="eyeball" fill="#000000" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" cx="60" cy="60" r="12"/>',
+        '  <circle name="eyeball" fill="#000000" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" cx="90" cy="90" r="12"/>',
         ' </g>',
         '</svg>'
     ].join("");
