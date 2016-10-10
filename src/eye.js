@@ -5,7 +5,7 @@
 * Time: 03:52 PM
 * To change this template use Tools | Templates.
 */
-define(['eyeball', 'topEyelid'], function(Eyeball, TopEyelid) {
+define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, BottomEyelid) {
     
     var SVG_HTML_TEMPLATE = [
         '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
@@ -34,16 +34,32 @@ define(['eyeball', 'topEyelid'], function(Eyeball, TopEyelid) {
             size          : 50,
             color         : "#FFFFFF",
             borderColor   : "#000000",
-            borderSize    : '5',
+            borderSize    : 5,
             //eyeball options
-            eyeballSize       : 12,
-            eyeballShift      : 20,
+            eyeball: {
+                size     : 12,
+                shift    : 20
+            },
             //top eyelid options
-            topEyelidColor              : "white",
-            topEyelidBorderColor        : "#000000",
-            topEyelidBorderSize         : '5',
-            topEyelidEyelashesStyle     : 'none',
-            topEyelidEyelashesPosition  : 'none',
+            topEyelid: {
+                size                   : 0,
+                color                  : "white",
+                borderColor            : "#000000",
+                borderSize             : 5,
+                bottomArcRadius        : 0,
+                bottomArcRadiusSweep   : 0,
+                eyelashesStyle         : 'none',
+                eyelashesPosition      : 'none'
+            },
+            //bottom eyelid options
+            bottomEyelid: {
+                size                   : 0,
+                color                  : "white",
+                borderColor            : "#000000",
+                borderSize             : 5,
+                topArcRadius           : 0,
+                topArcRadiusSweep      : 0
+            }
         };
         
         // Replace default optinos
@@ -72,18 +88,11 @@ define(['eyeball', 'topEyelid'], function(Eyeball, TopEyelid) {
         this._handlerNode = this._create_handlerNode(this.options["size"]);
         this._eyeNode = this._createEyeNode();
         
-        this.eyeball = new Eyeball(this._handlerNode, {
-            "eyeballSize"   : this.options['eyeballSize'],
-            "eyeballShift"  : this.options['eyeballShift'],
-        });
+        this.eyeball = new Eyeball(this._handlerNode, this.options.eyeball);
         
-        this.topEyelid = new TopEyelid(this._handlerNode, {
-            "color"             : this.options['topEyelidColor'],
-            "borderColor"       : this.options['topEyelidBorderColor'],
-            "borderSize"        : this.options['topEyelidBorderSize'],
-            "eyelashesStyle"    : this.options['topEyelidEyelashesStyle'],
-            "eyelashesPosition" : this.options['topEyelidEyelashesPosition'],
-        });
+        this.topEyelid = new TopEyelid(this._handlerNode, this.options.topEyelid);
+        
+        this.bottomEyelid = new BottomEyelid(this._handlerNode, this.options.bottomEyelid);
                 
         document.body.appendChild( this._handlerNode );
 

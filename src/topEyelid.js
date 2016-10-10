@@ -21,14 +21,17 @@ define(function() {
         this._handlerNode = handlerNode;
         
         this.options = {
+            //from 0 when open to 1 when closed
+            size                    : 0,  
             color                   : 'white',
             borderColor             : '#000000',
             borderSize              : 5,
+            //from 0 to 1, 0 if straight, 1 if rounded
             bottomArcRadius         : 0,
+            //arc direction, 0  or 1
             bottomArcRadiusSweep    : 0,
             eyelashesStyle          : 'none',
-            eyelashesPosition       : 'none',
-            size                    : 0.1            
+            eyelashesPosition       : 'none'
         };
                 
         this._setOptions(options);
@@ -49,6 +52,7 @@ define(function() {
         this.options.borderSize = options.borderSize || this.options.borderSize;
         this.options.eyelashesStyle = options.eyelashesStyle || this.options.eyelashesStyle;
         this.options.eyelashesPosition = options.eyelashesPosition || this.options.eyelashesPosition;
+        this.options.bottomArcRadiusSweep = options.bottomArcRadiusSweep || this.options.bottomArcRadiusSweep;
         this._setBottomArcRadius(options.bottomArcRadius || this.options.bottomArcRadius);
         this._setSize(options.size || this.options.size);   
     }
@@ -121,8 +125,7 @@ define(function() {
             else {
                 d = this._createEyelashes(d, startPointX, startPointY, this.options.eyelashesPosition);  
             }
-        }
-        
+        }        
         
         d = d + 'z'; //close path
         return d;
@@ -143,7 +146,7 @@ define(function() {
             var arcRadius = 50 / this.options.bottomArcRadius;
             d = d + " A" + arcRadius + "," + arcRadius + " 0 0 " + this.options.bottomArcRadiusSweep;
             //back to start point
-            d = d + endPointX + "," + endPointY;
+            d = d + " " + endPointX + "," + endPointY;
         }
         else{
             //bottom line

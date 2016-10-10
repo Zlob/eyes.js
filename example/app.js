@@ -9,7 +9,8 @@
 require.config({
     baseUrl: "/eyeAnimator/src",
     paths: {
-        "eyeAnimator": "eyeAnimator"
+        "eyeAnimator": "eyeAnimator",
+        
     },
     waitSeconds: 15
 });
@@ -19,70 +20,80 @@ require( ['eyeAnimator'], function( EyeAnimator ){
     var firstEye = animator.createEye(
         '#img1',
         {
-            x : 60,
-            y : 30,
+            x             : 44,
+            y             : 20,
             size          : 50,
-            color         : "red",
-            borderColor   : "brown",
+            color         : "white",
+            borderColor   : "black",
             borderSize    : 5,
-            "eyeballSize"       : 12,
-            "eyeballShift"      : 10,
+            //eyeball options
+            eyeball: {
+                size     : 12,
+                shift    : 20
+            },
+            //top eyelid options
+            topEyelid: {
+                size                   : 0.5,
+                color                  : "#f7b6a4",
+                borderColor            : "#000000",
+                borderSize             : 5,
+                bottomArcRadius        : 0.3,
+                bottomArcRadiusSweep   : 1,
+                eyelashesStyle         : 'none',
+                eyelashesPosition      : 'none'
+            },
+            //bottom eyelid options
+            bottomEyelid: {
+                size                   : 0.5,
+                color                  : "#f7b6a4",
+                borderColor            : "#000000",
+                borderSize             : 5,
+                topArcRadius           : 0.3,
+                topArcRadiusSweep      : 1
+            }
         });
-    
-    window.addEventListener("mousemove", function( e ) {
-                firstEye.eyeball.track({x: e.x, y: e.y, shift: 10});
-            }, false);
     
     
     var secondEye = animator.createEye(
         '#img1',
         {
-            x : 100,
-            y : 30,
+            x             : 83,
+            y             : 20,
             size          : 50,
-            color         : "red",
-            borderColor   : "brown",
+            color         : "white",
+            borderColor   : "black",
             borderSize    : 5,
-            "eyeballSize"       : 12,
-            "eyeballShift"      : 10,
+            //eyeball options
+            eyeball: {
+                size     : 12,
+                shift    : 20
+            },
+            //top eyelid options
+            topEyelid: {
+                size                   : 0.3,
+                color                  : "#f7b6a4",
+                borderColor            : "#000000",
+                borderSize             : 5,
+                bottomArcRadius        : 0,
+                bottomArcRadiusSweep   : 0,
+                eyelashesStyle         : 'none',
+                eyelashesPosition      : 'none'
+            },
+            //bottom eyelid options
+            bottomEyelid: {
+                size                   : 0.3,
+                color                  : "#f7b6a4",
+                borderColor            : "#000000",
+                borderSize             : 5,
+                topArcRadius           : 0,
+                topArcRadiusSweep      : 0
+            }
         });
     
-    var angle = 1;
-    window.addEventListener("mousemove", function( e ) {
-                secondEye.eyeball.track({angle: angle++, shift: 10});
-    }, false);
-    
-    
-    var thirdEye = animator.createEye(
-        '#img2',
-        {
-            x : 100,
-            y : 30,
-            size          : 50,
-            color         : "red",
-            borderColor   : "brown",
-            borderSize    : 5,
-            eyeballSize       : 12,
-            eyeballShift      : 10,
-            topEyelidEyelashesStyle     : 'loise',
-            topEyelidEyelashesPosition  : 'left',
-        });
-    
-    var topEyelidSize = 0;
-    var topEyelidBottomArc = 0;
-    window.addEventListener("mousemove", function( e ) {       
-        topEyelidBottomArc+=0.001;
-        console.log(topEyelidBottomArc);
-        topEyelidSize+=0.001;
-        
-        thirdEye.topEyelid.change({
-            size: topEyelidSize,
-            bottomArcRadius: topEyelidBottomArc
-        });
-    }, false);
-    
-//     setInterval(function()  {
-//         firstEye.move(100,100)
-//     }, 1000)
+//     window.addEventListener("mousemove", function( e ) {
+//         firstEye.eyeball.track({x: e.x, y: e.y});
+//         secondEye.eyeball.track({x: e.x, y: e.y});
+//     }, false);
+
     }
 );

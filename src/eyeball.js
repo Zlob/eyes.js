@@ -21,8 +21,8 @@ define(function() {
         this._handlerNode = handlerNode;
         
         this.options = {
-            "eyeballSize"       : 12,
-            "eyeballShift"      : 20,
+            size       : 12,
+            shift      : 20,
         };
                
         // Replace default optinos
@@ -64,34 +64,36 @@ define(function() {
     Eyeball.prototype._setNodeAttributes = function (eyeballNode) {
         var eyeballPath = eyeballNode.querySelector("[name=eyeball]");
         
-        eyeballPath.setAttribute("r", this.options["eyeballSize"]);
-        eyeballPath.setAttribute("cx", parseInt(this.options["eyeballShift"]) + parseInt(eyeballPath.getAttribute("cx")));
+        eyeballPath.setAttribute("r", this.options["size"]);
+        eyeballPath.setAttribute("cx", parseInt(this.options["shift"]) + parseInt(eyeballPath.getAttribute("cx")));
 
         return eyeballPath;
     }
     
     Eyeball.prototype._trackByAngle = function (angle, shift) {
-        var shift = shift || this.options['eyeballShift'];
+        var shift = shift || this.options['shift'];
                 
-        var x = 60 + shift * Math.cos(angle);
-        var y = 60 + shift * Math.sin(angle);
+        var x = 90 + shift * Math.cos(angle);
+        var y = 90 + shift * Math.sin(angle);
         
         this._setEyeballCoordinates(x,y);
     }
     
     Eyeball.prototype.trackByCoordinate = function (x1, y1, shift) {
-        var shift = shift || this.options['eyeballShift'];
+        var shift = shift || this.options['shift'];
               
         //eye center
         var eyeCenter = this._getEyeballCoordinates();          
            
         //distance between eye center and point
         var d = Math.sqrt(Math.pow(eyeCenter.x - x1, 2) + Math.pow(eyeCenter.y - y1, 2));
-        
+        if (d <= shift) {
+            shift = d;
+        }
         //eyeball position
-        var x = 60 - (eyeCenter.x - x1) / d * shift;
-        var y = 60 - (eyeCenter.y - y1) / d * shift;
-        
+        var x = 90 - (eyeCenter.x - x1) / d * shift;
+        var y = 90 - (eyeCenter.y - y1) / d * shift;
+
         this._setEyeballCoordinates(x,y);
     }
     
