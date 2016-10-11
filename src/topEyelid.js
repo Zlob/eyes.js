@@ -30,7 +30,9 @@ define(function() {
             bottomArcRadius         : 0,
             //arc direction, 0  or 1
             bottomArcRadiusSweep    : 0,
+            //none or loise
             eyelashesStyle          : 'none',
+            //none, left or right
             eyelashesPosition       : 'none'
         };
                 

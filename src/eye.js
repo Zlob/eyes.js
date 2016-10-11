@@ -35,6 +35,8 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
             color         : "#FFFFFF",
             borderColor   : "#000000",
             borderSize    : 5,
+            //left or right eye
+            type          : 'left',
             //eyeball options
             eyeball: {
                 size     : 12,
