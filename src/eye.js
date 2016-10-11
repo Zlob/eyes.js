@@ -50,6 +50,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
                 borderSize             : 5,
                 bottomArcRadius        : 0,
                 bottomArcRadiusSweep   : 0,
+                rotate                 : 0,
                 eyelashesStyle         : 'none',
                 eyelashesPosition      : 'none'
             },
@@ -60,7 +61,8 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
                 borderColor            : "#000000",
                 borderSize             : 5,
                 topArcRadius           : 0,
-                topArcRadiusSweep      : 0
+                topArcRadiusSweep      : 0,
+                rotate                 : 0
             }
         };
         

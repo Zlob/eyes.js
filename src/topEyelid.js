@@ -25,7 +25,9 @@ define(function() {
             //none or loise
             eyelashesStyle          : 'none',
             //none, left or right
-            eyelashesPosition       : 'none'
+            eyelashesPosition       : 'none',
+            //eyelid angle, from -30 to 30
+            rotate                  : 0
         };
                 
         this._setOptions(options);
@@ -47,6 +49,7 @@ define(function() {
         this.options.eyelashesStyle = options.eyelashesStyle || this.options.eyelashesStyle;
         this.options.eyelashesPosition = options.eyelashesPosition || this.options.eyelashesPosition;
         this.options.bottomArcRadiusSweep = options.bottomArcRadiusSweep || this.options.bottomArcRadiusSweep;
+        this._setRotate(options.rotate || this.options.rotate);
         this._setBottomArcRadius(options.bottomArcRadius || this.options.bottomArcRadius);
         this._setSize(options.size || this.options.size);   
     }
@@ -63,6 +66,15 @@ define(function() {
         this.options.bottomArcRadius = this._normolizeParam(param);        
     }
     
+    TopEyelid.prototype._setRotate = function (param) {
+        if(param < -30){
+            param = -30;
+        } else if(param > 30){
+            param  = 30;
+        }        
+        this.options.rotate = param;        
+    }
+        
     TopEyelid.prototype._setSize = function (param) {
         this.options.size = this._normolizeParam(param);        
     }
@@ -99,6 +111,7 @@ define(function() {
         eyelidPath.setAttribute("fill", this.options.color);
         eyelidPath.setAttribute("stroke", this.options.borderColor);
         eyelidPath.setAttribute("stroke-width", this.options.borderSize);
+        eyelidPath.setAttribute("transform", "rotate("+this.options.rotate + ", 90, 90)");
         var d = this._createPath();
         eyelidPath.setAttribute('d', d);
         return eyelidPath;

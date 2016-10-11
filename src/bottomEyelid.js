@@ -21,7 +21,9 @@ define(function() {
             //from 0 to 1, 0 if straight, 1 if rounded
             topArcRadius            : 0,
             //arc direction, 0  or 1
-            topArcRadiusSweep       : 0                 
+            topArcRadiusSweep       : 0,
+            //eyelid angle, from -30 to 30
+            rotate                  : 0
         };
                 
         this._setOptions(options);
@@ -41,6 +43,7 @@ define(function() {
         this.options.borderColor = options.borderColor || this.options.borderColor;
         this.options.borderSize = options.borderSize || this.options.borderSize;
         this.options.topArcRadiusSweep = options.topArcRadiusSweep || this.options.topArcRadiusSweep;
+        this._setRotate(options.rotate || this.options.rotate);
         this._setTopArcRadius(options.topArcRadius || this.options.topArcRadius);
         this._setSize(options.size || this.options.size);   
     }
@@ -55,6 +58,15 @@ define(function() {
     
     BottomEyelid.prototype._setTopArcRadius = function (param) {
         this.options.topArcRadius = this._normolizeParam(param);        
+    }
+    
+    BottomEyelid.prototype._setRotate = function (param) {
+        if(param < -30){
+            param = -30;
+        } else if(param > 30){
+            param  = 30;
+        }        
+        this.options.rotate = param;        
     }
     
     BottomEyelid.prototype._setSize = function (param) {
@@ -88,6 +100,7 @@ define(function() {
         eyelidPath.setAttribute("fill", this.options.color);
         eyelidPath.setAttribute("stroke", this.options.borderColor);
         eyelidPath.setAttribute("stroke-width", this.options.borderSize);
+        eyelidPath.setAttribute("transform", "rotate("+this.options.rotate + ", 90, 90)");
         var d = this._createPath();
         eyelidPath.setAttribute('d', d);
         return eyelidPath;
