@@ -10,7 +10,7 @@ define(function() {
     var SVG_HTML_TEMPLATE = [
         '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
         ' <g>',
-        '  <circle name="eyeball" fill="#000000" stroke="#000000" stroke-width="5" stroke-linejoin="null" stroke-linecap="null" cx="90" cy="90" r="12"/>',
+        '  <circle name="eyeball" />',
         ' </g>',
         '</svg>'
     ].join("");
@@ -51,10 +51,10 @@ define(function() {
     }
     
     Eyeball.prototype._createEyeballNode = function () {
-        var eyeballNode = document.createElement("object");
-        
-        eyeballNode.style.position = "absolute";    
-        eyeballNode.innerHTML = SVG_HTML_TEMPLATE;
+        var eyeballNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        var pathNode = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        pathNode.setAttribute('name', 'eyeball');
+        eyeballNode.appendChild(pathNode);
         this._setNodeAttributes(eyeballNode);
         this.parent.append(eyeballNode); 
         
@@ -64,8 +64,14 @@ define(function() {
     Eyeball.prototype._setNodeAttributes = function (eyeballNode) {
         var eyeballPath = eyeballNode.querySelector("[name=eyeball]");
         
+        eyeballPath.setAttribute("fill", "#000000");
+        eyeballPath.setAttribute("stroke", "#000000");
+        eyeballPath.setAttribute("stroke-width", 5);
+        eyeballPath.setAttribute("stroke-linejoin", null);
+        eyeballPath.setAttribute("stroke-linecap", null);
+        eyeballPath.setAttribute("cx", 90 + parseInt(this.options["shift"]));
+        eyeballPath.setAttribute("cy", 90);
         eyeballPath.setAttribute("r", this.options["size"]);
-        eyeballPath.setAttribute("cx", parseInt(this.options["shift"]) + parseInt(eyeballPath.getAttribute("cx")));
 
         return eyeballPath;
     }

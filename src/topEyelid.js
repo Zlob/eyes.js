@@ -6,19 +6,11 @@
 * To change this template use Tools | Templates.
 */
 define(function() {
-    var SVG_HTML_TEMPLATE = [
-        '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
-        ' <g>',
-        '  <path name="top-eyelid"/>',
-        '  <path name="top-eyelashes"/>',
-        ' </g>',
-        '</svg>'
-    ].join("");
     
-    var TopEyelid = function (parant, options) {
+    var TopEyelid = function (parent, options) {
         var self = this;
                         
-        this.parant = parant;
+        this.parent = parent;
         
         this.options = {
             //from 0 when open to 1 when closed
@@ -86,13 +78,18 @@ define(function() {
     }
     
     TopEyelid.prototype._createEyelidNode = function () {
-        var eyelidNode = document.createElement("object");
+        var eyelidNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        var eyelidPathNode = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        eyelidPathNode.setAttribute('name', 'top-eyelid');
+        eyelidNode.appendChild(eyelidPathNode);
         
-        eyelidNode.style.position = "absolute";    
-        eyelidNode.innerHTML = SVG_HTML_TEMPLATE;
+        var eyelashesPathNode = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        eyelashesPathNode.setAttribute('name', 'top-eyelashes');
+        eyelidNode.appendChild(eyelashesPathNode);
+        
         this._setNodeAttributes(eyelidNode);
-        this.parant.append(eyelidNode); 
-        
+        this.parent.append(eyelidNode); 
+
         return eyelidNode;
     }
     
@@ -166,27 +163,28 @@ define(function() {
     
     TopEyelid.prototype._createFirstEyelash = function (x, y, position) {
         var d = "";
-        var eyeLashCenterX = position == 'right' ? 5 : -5;
-        var eyeLashCenterY = 0;
-        var eyeLashEndX = position == 'right' ? 15 : -15;
-        var eyeLashEndY = -15;
+        var eyeLashCenterX = position == 'right' ? x + 10 : x - 10;
+        var eyeLashCenterY = y;
+        var eyeLashEndX = position == 'right' ? x + 15 : x -15;
+        var eyeLashEndY = y - 15;
         
         return this._createEyelash(x, y, eyeLashCenterX, eyeLashCenterY, eyeLashEndX, eyeLashEndY); 
     }
     
     TopEyelid.prototype._createSecondEyelash = function (x, y, position) {
-        var eyeLashCenterX = position == 'right' ? 25 : -25;
-        var eyeLashCenterY = 0;
-        var eyeLashEndX = position == 'right' ? 25 : -25;
-        var eyeLashEndY = -10;
+        var eyeLashCenterX = position == 'right' ? x + 25 : x - 25;
+        var eyeLashCenterY = y;
+        var eyeLashEndX = position == 'right' ? x + 25 : x - 25;
+        var eyeLashEndY = y - 10;
 
         return this._createEyelash(x, y, eyeLashCenterX, eyeLashCenterY, eyeLashEndX, eyeLashEndY);
     }
     
     TopEyelid.prototype._createEyelash = function (startX, startY, centerX, centerY, endX, endY) {
         var d = " M " + startX + "," + startY;
-        d += " q" + centerX + "," + centerY + " " + endX + "," +endY + " ";
-        d += " M " + startX + "," + startY + " ";
+        d += " Q" + centerX + "," + centerY + " " + endX + "," + endY + " ";
+        //way back
+        d += " Q" + centerX + "," + centerY + " " + startX + "," + startY + " ";
         return d;
     }
 

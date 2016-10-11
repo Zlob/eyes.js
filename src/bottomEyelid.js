@@ -6,13 +6,6 @@
 * To change this template use Tools | Templates.
 */
 define(function() {
-    var SVG_HTML_TEMPLATE = [
-        '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
-        ' <g>',
-        '  <path name="bottom-eyelid"/>',
-        ' </g>',
-        '</svg>'
-    ].join("");
     
     var BottomEyelid = function (parent, options) {
         var self = this;
@@ -79,10 +72,10 @@ define(function() {
     }
     
     BottomEyelid.prototype._createEyelidNode = function () {
-        var eyelidNode = document.createElement("object");
-        
-        eyelidNode.style.position = "absolute";    
-        eyelidNode.innerHTML = SVG_HTML_TEMPLATE;
+        var eyelidNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        var pathNode = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        pathNode.setAttribute('name', 'bottom-eyelid');
+        eyelidNode.appendChild(pathNode);
         this._setNodeAttributes(eyelidNode);
         this.parent.append(eyelidNode); 
         

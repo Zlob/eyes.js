@@ -8,9 +8,9 @@
 define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, BottomEyelid) {
     
     var SVG_HTML_TEMPLATE = [
-        '<svg width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
+        '<svg name="svg-node" width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
         ' <g>',
-        '  <circle name="eye" fill="#ffffff" stroke="#000000" stroke-width="5" cx="90" cy="90" r="50" />',
+        '  <circle name="eye" cx="90" cy="90" r="50" />',
         ' </g>',
         '</svg>'
     ].join("");
@@ -85,8 +85,8 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
     }
     
     //append node
-    Eye.prototype.append = function ( node ) {       
-        this._handlerNode.appendChild(node);
+    Eye.prototype.append = function ( node ) {   
+        this._handlerNode.querySelector("[name=svg-node]").appendChild(node);
     }
                 
     Eye.prototype._render = function () {
@@ -132,10 +132,11 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
     }
     
     Eye.prototype._setNodeAttributes = function (eyeNode) {
-        var eyePath = eyeNode.querySelector("[name=eye]");
+        var svgNode = eyeNode.querySelector("[name=svg-node]");
+        svgNode.setAttribute("width", this.options['size']);
+        svgNode.setAttribute("height", this.options['size']);       
         
-        eyePath.setAttribute("width", this.options['size']);
-        eyePath.setAttribute("height", this.options['size']);        
+        var eyePath = eyeNode.querySelector("[name=eye]");
         eyePath.setAttribute("fill", this.options['color']);
         eyePath.setAttribute("stroke", this.options['borderColor']);
         eyePath.setAttribute("stroke-width", this.options['borderSize']);
