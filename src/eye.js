@@ -83,18 +83,23 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
         this._handlerNode.style.left = parentPostion["left"] + (x + pageXOffset) + "px";
         this._handlerNode.style.top  = parentPostion["top"]  + (y + pageYOffset) + "px";
     }
+    
+    //append node
+    Eye.prototype.append = function ( node ) {       
+        this._handlerNode.appendChild(node);
+    }
                 
     Eye.prototype._render = function () {
         var self = this;
         
-        this._handlerNode = this._create_handlerNode(this.options["size"]);
+        this._handlerNode = this._createHandlerNode(this.options["size"]);
         this._eyeNode = this._createEyeNode();
         
-        this.eyeball = new Eyeball(this._handlerNode, this.options.eyeball);
+        this.eyeball = new Eyeball(this, this.options.eyeball);
         
-        this.topEyelid = new TopEyelid(this._handlerNode, this.options.topEyelid);
+        this.topEyelid = new TopEyelid(this, this.options.topEyelid);
         
-        this.bottomEyelid = new BottomEyelid(this._handlerNode, this.options.bottomEyelid);
+        this.bottomEyelid = new BottomEyelid(this, this.options.bottomEyelid);
                 
         document.body.appendChild( this._handlerNode );
 
@@ -104,7 +109,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
         this._handlerNode.style.display = "block";   
     }
     
-    Eye.prototype._create_handlerNode = function (size) {
+    Eye.prototype._createHandlerNode = function (size) {
         var _handlerNode = document.createElement("object");
         
         _handlerNode.style.display  = "none";

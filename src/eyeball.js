@@ -15,10 +15,10 @@ define(function() {
         '</svg>'
     ].join("");
     
-    var Eyeball = function (handlerNode, options) {
+    var Eyeball = function (parent, options) {
         var self = this;
                         
-        this._handlerNode = handlerNode;
+        this.parent = parent;
         
         this.options = {
             size       : 12,
@@ -56,7 +56,7 @@ define(function() {
         eyeballNode.style.position = "absolute";    
         eyeballNode.innerHTML = SVG_HTML_TEMPLATE;
         this._setNodeAttributes(eyeballNode);
-        this._handlerNode.appendChild(eyeballNode); 
+        this.parent.append(eyeballNode); 
         
         return eyeballNode;
     }

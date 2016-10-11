@@ -14,10 +14,10 @@ define(function() {
         '</svg>'
     ].join("");
     
-    var BottomEyelid = function (handlerNode, options) {
+    var BottomEyelid = function (parent, options) {
         var self = this;
                         
-        this._handlerNode = handlerNode;
+        this.parent = parent;
         
         this.options = {
             //from 0 when open to 1 when closed
@@ -84,7 +84,7 @@ define(function() {
         eyelidNode.style.position = "absolute";    
         eyelidNode.innerHTML = SVG_HTML_TEMPLATE;
         this._setNodeAttributes(eyelidNode);
-        this._handlerNode.appendChild(eyelidNode); 
+        this.parent.append(eyelidNode); 
         
         return eyelidNode;
     }
