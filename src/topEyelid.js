@@ -122,10 +122,10 @@ define(function() {
         d = this._createBottomArc(d, startPointX, startPointY);
         if (this.options.eyelashesStyle == 'loise') {
             if (this.options.eyelashesPosition == 'right') {
-                d = this._createEyelashes(d, endPointX, endPointY, this.options.eyelashesPosition);            
+                d += this._createEyelashes(endPointX, endPointY, this.options.eyelashesPosition);            
             }
             else {
-                d = this._createEyelashes(d, startPointX, startPointY, this.options.eyelashesPosition);  
+                d += this._createEyelashes(startPointX, startPointY, this.options.eyelashesPosition);  
             }
         }        
         
@@ -158,21 +158,35 @@ define(function() {
     }
     
     
-    TopEyelid.prototype._createEyelashes = function (d, x, y, position) {
-        if (position == 'right') {
-            d += " M " + x + "," + y;
-            d += " q5,0 15,-15";
-            d += " M " + x + "," + y;
-            d += " q20,0 25,-10";
-            d +=  "M " + x + "," + y;
-        }
-        else if (position == 'left'){
-            d += " M " + x + "," + y;
-            d += " q-5,0 -15,-15";
-            d += " M " + x + "," + y;
-            d += " q-20,0 -25,-10";
-            d +=  "M " + x + "," + y;
-        }
+    TopEyelid.prototype._createEyelashes = function (x, y, position) {
+        var d = this._createFirstEyelash(x, y, position);
+        d += this._createSecondEyelash(x, y, position);
+        return d;
+    }
+    
+    TopEyelid.prototype._createFirstEyelash = function (x, y, position) {
+        var d = "";
+        var eyeLashCenterX = position == 'right' ? 5 : -5;
+        var eyeLashCenterY = 0;
+        var eyeLashEndX = position == 'right' ? 15 : -15;
+        var eyeLashEndY = -15;
+        
+        return this._createEyelash(x, y, eyeLashCenterX, eyeLashCenterY, eyeLashEndX, eyeLashEndY); 
+    }
+    
+    TopEyelid.prototype._createSecondEyelash = function (x, y, position) {
+        var eyeLashCenterX = position == 'right' ? 25 : -25;
+        var eyeLashCenterY = 0;
+        var eyeLashEndX = position == 'right' ? 25 : -25;
+        var eyeLashEndY = -10;
+
+        return this._createEyelash(x, y, eyeLashCenterX, eyeLashCenterY, eyeLashEndX, eyeLashEndY);
+    }
+    
+    TopEyelid.prototype._createEyelash = function (startX, startY, centerX, centerY, endX, endY) {
+        var d = " M " + startX + "," + startY;
+        d += " q" + centerX + "," + centerY + " " + endX + "," +endY + " ";
+        d += " M " + startX + "," + startY + " ";
         return d;
     }
 
