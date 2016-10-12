@@ -16,19 +16,19 @@ define(['eye'], function(Eye) {
             var eye = new Eye(selector, options);
             eyes.push(eye);
             return eye
-        }
+        };
         
         this._resize = function () {
             for( var idx in eyes ) {
                 eyes[idx].moveToPosition();
             }
-        }
+        };
         
         window.addEventListener("resize", function( e ) {
             self._resize();
         }, false);
         
-    }
+    };
     
     return eyeAnimator;
 });

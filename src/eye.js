@@ -5,7 +5,7 @@
 * Time: 03:52 PM
 * To change this template use Tools | Templates.
 */
-define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, BottomEyelid) {
+define(['eyeball', 'topEyelid', 'bottomEyelid'], function(Eyeball, TopEyelid, BottomEyelid) {
     
     var SVG_HTML_TEMPLATE = [
         '<svg name="svg-node" width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
@@ -16,15 +16,12 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
     ].join("");
     
     var Eye = function (selector, options) {
-        var self = this;
-                        
         this.selector = selector;
 
         this._element = document.querySelector( selector );
 
         if ( !this._element ) {
             throw new Error("Not valid image selector");
-            return;
         }
         
         // Default options
@@ -69,31 +66,29 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
         // Replace default optinos
         for( var key in options ) {
             this.options[key] = options[key];
-        };
+        }
         
         this._render();
-    }
+    };
     
     Eye.prototype.moveToPosition = function ( ) {
         this.move( this.options["x"], this.options["y"] );  
-    }
+    };
         
-    // Relactive to parent image
+    // Relative to parent image
     Eye.prototype.move = function ( x, y ) {
         var parentPostion = this._element.getBoundingClientRect();        
         this._handlerNode.style.position = "absolute";
         this._handlerNode.style.left = parentPostion["left"] + (x + pageXOffset) + "px";
         this._handlerNode.style.top  = parentPostion["top"]  + (y + pageYOffset) + "px";
-    }
+    };
     
     //append node
     Eye.prototype.append = function ( node ) {   
         this._handlerNode.querySelector("[name=svg-node]").appendChild(node);
-    }
+    };
                 
     Eye.prototype._render = function () {
-        var self = this;
-        
         this._handlerNode = this._createHandlerNode(this.options["size"]);
         this._eyeNode = this._createEyeNode();
         
@@ -109,7 +104,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
         
         //Set visible AFTER change position
         this._handlerNode.style.display = "block";   
-    }
+    };
     
     Eye.prototype._createHandlerNode = function (size) {
         var _handlerNode = document.createElement("object");
@@ -120,7 +115,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
         _handlerNode.setAttribute("height", size);
         
         return _handlerNode;
-    }
+    };
     
     Eye.prototype._createEyeNode = function () {
         var eyeNode = document.createElement("object");
@@ -131,7 +126,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
         this._handlerNode.appendChild(eyeNode); 
         
         return eyeNode;
-    }
+    };
     
     Eye.prototype._setNodeAttributes = function (eyeNode) {
         var svgNode = eyeNode.querySelector("[name=svg-node]");
@@ -144,7 +139,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid',], function(Eyeball, TopEyelid, B
         eyePath.setAttribute("stroke-width", this.options['borderSize']);
         
         return eyeNode;
-    }
+    };
     
     return Eye;
 });

@@ -8,8 +8,7 @@
 define(function() {
     
     var TopEyelid = function (parent, options) {
-        var self = this;
-                        
+
         this.parent = parent;
         
         this.options = {
@@ -33,13 +32,13 @@ define(function() {
         this._setOptions(options);
         
         this._render();
-    }
+    };
     
     TopEyelid.prototype.change = function (options) {
         var self = this;
         self._setOptions(options);        
         self._setNodeAttributes(self.eyelidNode)
-    }
+    };
     
     TopEyelid.prototype._setOptions = function (options) {
         // Replace default optinos
@@ -52,19 +51,16 @@ define(function() {
         this._setRotate(options.rotate || this.options.rotate);
         this._setBottomArcRadius(options.bottomArcRadius || this.options.bottomArcRadius);
         this._setSize(options.size || this.options.size);   
-    }
+    };
     
     TopEyelid.prototype._render = function () {
-        var self = this;
-        
         this.eyelidNode = this._createEyelidNode();
-                
         return this;
-    }
+    };
     
     TopEyelid.prototype._setBottomArcRadius = function (param) {
         this.options.bottomArcRadius = this._normolizeParam(param);        
-    }
+    };
     
     TopEyelid.prototype._setRotate = function (param) {
         if(param < -30){
@@ -73,11 +69,11 @@ define(function() {
             param  = 30;
         }        
         this.options.rotate = param;        
-    }
+    };
         
     TopEyelid.prototype._setSize = function (param) {
         this.options.size = this._normolizeParam(param);        
-    }
+    };
         
     TopEyelid.prototype._normolizeParam = function (param) {
         if(param >= 1){
@@ -87,8 +83,8 @@ define(function() {
             param = 0;
         }
         return param;
-    }
-    
+    };
+
     TopEyelid.prototype._createEyelidNode = function () {
         var eyelidNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
         var eyelidPathNode = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -103,7 +99,7 @@ define(function() {
         this.parent.append(eyelidNode); 
 
         return eyelidNode;
-    }
+    };
     
     TopEyelid.prototype._setNodeAttributes = function (eyelidNode) {
         var eyelidPath = eyelidNode.querySelector("[name=top-eyelid]");
@@ -115,33 +111,33 @@ define(function() {
         var d = this._createPath();
         eyelidPath.setAttribute('d', d);
         return eyelidPath;
-    }
+    };
     
     TopEyelid.prototype._createPath = function ( ) {
-        var angle = (Math.PI/2) - (Math.PI * this.options.size);
-                
+        var angle = (Math.PI / 2) - (Math.PI * this.options.size);
+
         var startPointX = 90 - (Math.cos(angle) * 50 );
         var startPointY = 90 - (Math.sin(angle) * 50 );
-        
+
         var endPointX = (90 + 90 - startPointX);
         var endPointY = startPointY;
         var d = "";
         //left start point
-        d = d + "M"+startPointX+","+startPointY;
+        d = d + "M" + startPointX + "," + startPointY;
         d = this._createTopArc(d, endPointX, endPointY);
         d = this._createBottomArc(d, startPointX, startPointY);
         if (this.options.eyelashesStyle == 'loise') {
             if (this.options.eyelashesPosition == 'right') {
-                d += this._createEyelashes(endPointX, endPointY, this.options.eyelashesPosition);            
+                d += this._createEyelashes(endPointX, endPointY, this.options.eyelashesPosition);
             }
             else {
-                d += this._createEyelashes(startPointX, startPointY, this.options.eyelashesPosition);  
+                d += this._createEyelashes(startPointX, startPointY, this.options.eyelashesPosition);
             }
-        }        
-        
+        }
+
         d = d + 'z'; //close path
         return d;
-    }
+    };
     
     TopEyelid.prototype._createTopArc = function (d, endPointX, endPointY) {
         var largeArcFlag = this.options.size > 0.5 ? 1 : 0;
@@ -150,7 +146,7 @@ define(function() {
         //right end point
         d = d + endPointX + "," + endPointY;
         return d;
-    }
+    };
     
     TopEyelid.prototype._createBottomArc = function (d, endPointX, endPointY) {
         if (this.options.bottomArcRadius != 0){
@@ -165,24 +161,23 @@ define(function() {
             d = d + " L" + endPointX + ',' + endPointY;
         }     
         return d;
-    }
+    };
     
     
     TopEyelid.prototype._createEyelashes = function (x, y, position) {
         var d = this._createFirstEyelash(x, y, position);
         d += this._createSecondEyelash(x, y, position);
         return d;
-    }
+    };
     
     TopEyelid.prototype._createFirstEyelash = function (x, y, position) {
-        var d = "";
         var eyeLashCenterX = position == 'right' ? x + 10 : x - 10;
         var eyeLashCenterY = y;
         var eyeLashEndX = position == 'right' ? x + 15 : x -15;
         var eyeLashEndY = y - 15;
         
         return this._createEyelash(x, y, eyeLashCenterX, eyeLashCenterY, eyeLashEndX, eyeLashEndY); 
-    }
+    };
     
     TopEyelid.prototype._createSecondEyelash = function (x, y, position) {
         var eyeLashCenterX = position == 'right' ? x + 25 : x - 25;
@@ -191,7 +186,7 @@ define(function() {
         var eyeLashEndY = y - 10;
 
         return this._createEyelash(x, y, eyeLashCenterX, eyeLashCenterY, eyeLashEndX, eyeLashEndY);
-    }
+    };
     
     TopEyelid.prototype._createEyelash = function (startX, startY, centerX, centerY, endX, endY) {
         var d = " M " + startX + "," + startY;
@@ -199,9 +194,7 @@ define(function() {
         //way back
         d += " Q" + centerX + "," + centerY + " " + startX + "," + startY + " ";
         return d;
-    }
-
-        
+    };
     
     return TopEyelid;
 });
