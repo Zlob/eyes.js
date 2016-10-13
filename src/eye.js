@@ -71,13 +71,16 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 rotate                  : 0
             }
         };
-        
+
+        this._setOptions(options);
+        this._render();
+    };
+
+    Eye.prototype._setOptions = function (options) {
         // Replace default optinos
         for( var key in options ) {
             this.options[key] = options[key];
         }
-        
-        this._render();
     };
     
     Eye.prototype.moveToPosition = function ( ) {
