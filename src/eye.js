@@ -61,7 +61,14 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 rotate                 : 0
             },
             eyebrow: {
-
+                width                   : 80,
+                height                  : 5,
+                position                : 0.5, //from 0 (very  top) to 1 (near eye)
+                color                   : '#000000',
+                borderColor             : '#000000',
+                borderSize              : 0,
+                //eyebrow angle, from -30 to 30
+                rotate                  : 0
             }
         };
         
