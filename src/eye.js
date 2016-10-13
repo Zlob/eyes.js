@@ -48,8 +48,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 bottomArcRadius        : 0,
                 bottomArcRadiusSweep   : 0,
                 rotate                 : 0,
-                eyelashesStyle         : 'none',
-                eyelashesPosition      : 'none'
+                eyelashesStyle         : 'none'
             },
             //bottom eyelid options
             bottomEyelid: {
@@ -97,7 +96,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
         
         this.eyeball = new Eyeball(this, this.options.eyeball);
         
-        this.topEyelid = new TopEyelid(this, this.options.topEyelid);
+        this.topEyelid = new TopEyelid(this, this.options.type, this.options.topEyelid);
         
         this.bottomEyelid = new BottomEyelid(this, this.options.bottomEyelid);
 

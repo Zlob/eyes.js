@@ -7,9 +7,11 @@
 */
 define(function() {
     
-    var TopEyelid = function (parent, options) {
+    var TopEyelid = function (parent, type, options) {
 
         this.parent = parent;
+
+        this.type = type;
         
         this.options = {
             //from 0 when open to 1 when closed
@@ -23,8 +25,6 @@ define(function() {
             bottomArcRadiusSweep    : 0,
             //none or loise
             eyelashesStyle          : 'none',
-            //none, left or right
-            eyelashesPosition       : 'none',
             //eyelid angle, from -30 to 30
             rotate                  : 0
         };
@@ -46,7 +46,6 @@ define(function() {
         this.options.borderColor = options.borderColor || this.options.borderColor;
         this.options.borderSize = options.borderSize || this.options.borderSize;
         this.options.eyelashesStyle = options.eyelashesStyle || this.options.eyelashesStyle;
-        this.options.eyelashesPosition = options.eyelashesPosition || this.options.eyelashesPosition;
         this.options.bottomArcRadiusSweep = options.bottomArcRadiusSweep || this.options.bottomArcRadiusSweep;
         this._setRotate(options.rotate || this.options.rotate);
         this._setBottomArcRadius(options.bottomArcRadius || this.options.bottomArcRadius);
@@ -96,7 +95,7 @@ define(function() {
         eyelidNode.appendChild(eyelashesPathNode);
         
         this._setNodeAttributes(eyelidNode);
-        this.parent.append(eyelidNode); 
+        this.parent.append(eyelidNode);
 
         return eyelidNode;
     };
@@ -127,11 +126,11 @@ define(function() {
         d = this._createTopArc(d, endPointX, endPointY);
         d = this._createBottomArc(d, startPointX, startPointY);
         if (this.options.eyelashesStyle == 'loise') {
-            if (this.options.eyelashesPosition == 'right') {
-                d += this._createEyelashes(endPointX, endPointY, this.options.eyelashesPosition);
+            if (this.type == 'right') {
+                d += this._createEyelashes(endPointX, endPointY, this.type);
             }
             else {
-                d += this._createEyelashes(startPointX, startPointY, this.options.eyelashesPosition);
+                d += this._createEyelashes(startPointX, startPointY, this.type);
             }
         }
 
