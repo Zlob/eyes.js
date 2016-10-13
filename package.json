@@ -1,0 +1,37 @@
+{
+  "name": "eye-animator",
+  "version": "1.0.0",
+  "description": "javascript library",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "grunt-contrib-requirejs": "^1.0.0"
+  },
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-requirejs": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zlob/eye-animator.git"
+  },
+  "keywords": [
+    "javascript",
+    "eye",
+    "animation"
+  ],
+  "author": "vamakin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zlob/eye-animator/issues"
+  },
+  "homepage": "https://github.com/Zlob/eye-animator#readme"
+}

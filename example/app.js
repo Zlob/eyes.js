@@ -7,15 +7,15 @@
 */
 
 require.config({
-    baseUrl: "/eyeAnimator/src",
+    // baseUrl: "../src",
     paths: {
-        "eyeAnimator": "eyeAnimator",
-        
+        "eyeAnimator": "eyeAnimator/dist/eyeAnimator",
+        "jquery"    : "bower_components/jquery/dist/jquery.min"
     },
     waitSeconds: 15
 });
 
-require( ['eyeAnimator'], function( EyeAnimator ){
+require( ['eyeAnimator', 'jquery'], function( EyeAnimator ){
     var animator = new EyeAnimator();
     var firstEye = animator.createEye(
         '#img1',
@@ -26,6 +26,7 @@ require( ['eyeAnimator'], function( EyeAnimator ){
             color         : "white",
             borderColor   : "black",
             borderSize    : 5,
+            type          : "left",
             //eyeball options
             eyeball: {
                 size     : 12,
@@ -39,8 +40,7 @@ require( ['eyeAnimator'], function( EyeAnimator ){
                 borderSize             : 5,
                 bottomArcRadius        : 0.3,
                 bottomArcRadiusSweep   : 1,
-                eyelashesStyle         : 'none',
-                eyelashesPosition      : 'none'
+                eyelashesStyle         : 'loise',
             },
             //bottom eyelid options
             bottomEyelid: {
@@ -50,6 +50,9 @@ require( ['eyeAnimator'], function( EyeAnimator ){
                 borderSize             : 5,
                 topArcRadius           : 0.3,
                 topArcRadiusSweep      : 1
+            },
+            eyebrow: {
+                rotate: -20
             }
         });
     
@@ -63,6 +66,7 @@ require( ['eyeAnimator'], function( EyeAnimator ){
             color         : "white",
             borderColor   : "black",
             borderSize    : 5,
+            type          : "right",
             //eyeball options
             eyeball: {
                 size     : 12,
@@ -76,8 +80,7 @@ require( ['eyeAnimator'], function( EyeAnimator ){
                 borderSize             : 5,
                 bottomArcRadius        : 0,
                 bottomArcRadiusSweep   : 0,
-                eyelashesStyle         : 'none',
-                eyelashesPosition      : 'none'
+                eyelashesStyle         : 'loise'
             },
             //bottom eyelid options
             bottomEyelid: {
@@ -87,6 +90,9 @@ require( ['eyeAnimator'], function( EyeAnimator ){
                 borderSize             : 5,
                 topArcRadius           : 0,
                 topArcRadiusSweep      : 0
+            },
+            eyebrow: {
+                rotate: 20
             }
         });
     
