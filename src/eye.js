@@ -5,7 +5,7 @@
 * Time: 03:52 PM
 * To change this template use Tools | Templates.
 */
-define(['eyeball', 'topEyelid', 'bottomEyelid'], function(Eyeball, TopEyelid, BottomEyelid) {
+define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, TopEyelid, BottomEyelid, Eyebrow) {
     
     var SVG_HTML_TEMPLATE = [
         '<svg name="svg-node" width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
@@ -60,6 +60,9 @@ define(['eyeball', 'topEyelid', 'bottomEyelid'], function(Eyeball, TopEyelid, Bo
                 topArcRadius           : 0,
                 topArcRadiusSweep      : 0,
                 rotate                 : 0
+            },
+            eyebrow: {
+
             }
         };
         
@@ -97,6 +100,8 @@ define(['eyeball', 'topEyelid', 'bottomEyelid'], function(Eyeball, TopEyelid, Bo
         this.topEyelid = new TopEyelid(this, this.options.topEyelid);
         
         this.bottomEyelid = new BottomEyelid(this, this.options.bottomEyelid);
+
+        this.eyebrow = new Eyebrow(this, this.options.eyebrow);
                 
         document.body.appendChild( this._handlerNode );
 
