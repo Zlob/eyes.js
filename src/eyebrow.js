@@ -10,7 +10,6 @@ define(function(){
            color                   : '#000000',
            borderColor             : '#000000',
            borderSize              : 0,
-
            //eyebrow angle, from -30 to 30
            rotate                  : 25
        };
