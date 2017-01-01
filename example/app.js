@@ -49,7 +49,7 @@ require(['eyes', 'jquery'], function (Eyes) {
                 }
             });
 
-        var rigjtHeaderEye = eyes.createEye(
+        var rightHeaderEye = eyes.createEye(
             '#header-eyes',
             {
                 x: 125,
@@ -90,7 +90,7 @@ require(['eyes', 'jquery'], function (Eyes) {
 
         window.addEventListener("mousemove", function (e) {
             leftHeaderEye.eyeball.track({x: e.x, y: e.y});
-            rigjtHeaderEye.eyeball.track({x: e.x, y: e.y});
+            rightHeaderEye.eyeball.track({x: e.x, y: e.y});
         }, false);
 
         var firstEye = eyes.createEye(
