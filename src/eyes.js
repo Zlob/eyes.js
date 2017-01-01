@@ -7,7 +7,7 @@
 */
 define(['eye'], function(Eye) {
     
-    var eyeAnimator = function () {
+    var Eyes = function () {
         var self = this;
         
         var eyes = [];
@@ -30,5 +30,5 @@ define(['eye'], function(Eye) {
         
     };
     
-    return eyeAnimator;
+    return Eyes;
 });

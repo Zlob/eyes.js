@@ -5,15 +5,15 @@ module.exports = function(grunt) {
             compile: {
                 options: {
                     baseUrl: "src",
-                    name: "eyeAnimator",
-                    out: "dist/eyeAnimator.js"
+                    name: "eyes",
+                    out: "dist/eyes.js"
                 }
             },
             minify: {
                 options: {
                     baseUrl: "src",
-                    name: "eyeAnimator",
-                    out: "dist/eyeAnimator.min.js",
+                    name: "eyes",
+                    out: "dist/eyes.min.js",
                     optimize: "none",
                 }
             }
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     // includes files within path
-                    {expand: true, src: ['dist/**'], dest: 'example/eyeAnimator/'},
+                    {expand: true, src: ['dist/**'], dest: 'example/eyes/'},
                 ],
             },
         },
