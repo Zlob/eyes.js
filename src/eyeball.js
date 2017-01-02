@@ -15,12 +15,8 @@ define(function() {
             size       : 12,
             shift      : 20
         };
-               
-        // Replace default optinos
-        for( var key in options ) {
-            this.options[key] = options[key];
-        }
-        
+
+        this._setOptions(options);
         this._render();
     };
     
@@ -32,10 +28,22 @@ define(function() {
             this.trackByCoordinate(options.x, options.y, options.shift)
         }
     };
-    
+
+    Eyeball.prototype._setOptions = function (options) {
+        for( var key in options ) {
+            this.options[key] = options[key];
+        }
+    };
+
     Eyeball.prototype._render = function () {
         this.eyeballNode = this._createEyeballNode();
         return this;
+    };
+
+    Eyeball.prototype.change = function (options) {
+        var self = this;
+        self._setOptions(options);
+        self._setNodeAttributes(this.eyeballNode);
     };
     
     Eyeball.prototype._createEyeballNode = function () {

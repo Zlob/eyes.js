@@ -116,7 +116,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 }
             }
         }
-        this._setAllNodesAttributes();
+        this._setNodeAttributes(this._eyeNode);
     };
                 
     Eye.prototype._render = function () {
@@ -174,9 +174,5 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
         return eyeNode;
     };
 
-    Eye.prototype._setAllNodesAttributes = function () {
-        this._setNodeAttributes(this._eyeNode);
-    };
-    
     return Eye;
 });

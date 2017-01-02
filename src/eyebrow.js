@@ -43,6 +43,12 @@ define(function(){
         return this;
     };
 
+    Eyebrow.prototype.change = function (options) {
+        var self = this;
+        self._setOptions(options);
+        self._setNodeAttributes(this.eyeballNode);
+    };
+
     Eyebrow.prototype._createEyebrowNode = function () {
         var eyebrowNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
         var eyebrowPathNode = document.createElementNS("http://www.w3.org/2000/svg", "rect");
