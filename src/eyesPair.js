@@ -3,24 +3,45 @@
  */
 define(['eye'], function (Eye) {
 
-    var EyesPair = function (options, center, distance) {
-
-        this.leftEyeOptons = this._getEye(options, center, distance, 'left');
-        this.rightEyeOptons = this._getEye(options, center, distance, 'right');
+    var EyesPair = function (selector, options, center, distance) {
+        this.leftEye = this._getEye(selector, options, center, distance, 'left');
+        this.rightEye = this._getEye(selector, options, center, distance, 'right');
     };
 
-    EyesPair.prototype._getEye = function (options, center, distance, type) {
-        var eyeOptons = JSON.parse(JSON.stringify(options));
-        eyeOptons.type = type;
+    EyesPair.prototype._getEye = function (selector, options, center, distance, type) {
+        var eyeOptions = JSON.parse(JSON.stringify(options));
+        eyeOptions.type = type;
         if (type == 'left') {
-            eyeOptons.x = center.x - distance/2;
-            eyeOptons.y = center.y;
+            eyeOptions.x = center.x - distance/2;
+            eyeOptions.y = center.y;
         } else if (type == 'right') {
-            eyeOptons.x = center.x + distance/2;
-            eyeOptons.y = center.y;
+            eyeOptions.x = center.x + distance/2;
+            eyeOptions.y = center.y;
         }
-        return new Eye(eyeOptons);
+        return new Eye(selector, eyeOptions);
     };
+
+    EyesPair.prototype.getLeftEye = function() {
+        return this.leftEye;
+    };
+
+    EyesPair.prototype.getRightEye = function() {
+        return this.rightEye;
+    };
+
+    EyesPair.prototype.getEye = function(type) {
+        if (type == 'left') {
+            return this.getLeftEye();
+        } else {
+            return this.getRightEye();
+        }
+    };
+
+    EyesPair.prototype.moveToPosition = function() {
+        this.leftEye.moveToPosition();
+        this.rightEye.moveToPosition();
+    };
+
 
     return EyesPair;
 });
