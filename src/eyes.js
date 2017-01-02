@@ -5,7 +5,7 @@
 * Time: 05:22 PM
 * To change this template use Tools | Templates.
 */
-define(['eye'], function(Eye) {
+define(['eye', 'eyesPair'], function(Eye, EyesPair) {
     
     var Eyes = function () {
         var self = this;
@@ -16,6 +16,12 @@ define(['eye'], function(Eye) {
             var eye = new Eye(selector, options);
             eyes.push(eye);
             return eye
+        };
+
+        this.createEyesPair = function (selector, options, center, distance) {
+            var eyesPair = new EyesPair(selector, options, center, distance);
+            eyes.push(eyesPair);
+            return eyesPair
         };
         
         this._resize = function () {
