@@ -89,10 +89,10 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
         
     // Relative to parent image
     Eye.prototype.move = function ( x, y ) {
-        var parentPostion = this._element.getBoundingClientRect();        
+        var parentPosition = this._element.getBoundingClientRect();
         this._handlerNode.style.position = "absolute";
-        this._handlerNode.style.left = parentPostion["left"] + (x + pageXOffset) + "px";
-        this._handlerNode.style.top  = parentPostion["top"]  + (y + pageYOffset) + "px";
+        this._handlerNode.style.left = parentPosition["left"] + (x + pageXOffset) + "px";
+        this._handlerNode.style.top  = parentPosition["top"]  + (y + pageYOffset) + "px";
     };
     
     //append node
