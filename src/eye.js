@@ -99,6 +99,25 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
     Eye.prototype.append = function ( node ) {   
         this._handlerNode.querySelector("[name=svg-node]").appendChild(node);
     };
+
+    Eye.prototype.change = function (options) {
+        for (var key in options) {
+            if (key == 'eyeball') {
+                this.eyeball.change(options[key]);
+            } else if (key == 'topEyelid') {
+                this.topEyelid.change(options[key]);
+            } else if (key == 'bottomEyelid') {
+                this.bottomEyelid.change(options[key]);
+            } else if (key == 'eyebrow') {
+                this.eyebrow.change(options[key]);
+            } else {
+                if (this.options[key] !== undefined) {
+                    this.options[key] = options[key];
+                }
+            }
+        }
+        this._setAllNodesAttributes();
+    };
                 
     Eye.prototype._render = function () {
         this._handlerNode = this._createHandlerNode(this.options["size"]);
@@ -153,6 +172,10 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
         eyePath.setAttribute("stroke-width", this.options['borderSize']);
         
         return eyeNode;
+    };
+
+    Eye.prototype._setAllNodesAttributes = function () {
+        this._setNodeAttributes(this._eyeNode);
     };
     
     return Eye;
