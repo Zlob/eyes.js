@@ -118,6 +118,14 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
         }
         this._setNodeAttributes(this._eyeNode);
     };
+
+    Eye.prototype.getCoordinates = function () {
+        var self = this;
+        var nodePosition = self._eyeNode.getBoundingClientRect();
+        var x = nodePosition.left + nodePosition.width/2;
+        var y = nodePosition.top  + nodePosition.height/2;
+        return { x: x, y: y };
+    };
                 
     Eye.prototype._render = function () {
         this._handlerNode = this._createHandlerNode(this.options["size"]);

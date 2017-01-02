@@ -39,14 +39,14 @@ define(function(){
     };
 
     Eyebrow.prototype._render = function () {
-        this.eyelidNode = this._createEyebrowNode();
+        this.eyebrowNode = this._createEyebrowNode();
         return this;
     };
 
     Eyebrow.prototype.change = function (options) {
         var self = this;
         self._setOptions(options);
-        self._setNodeAttributes(this.eyeballNode);
+        self._setNodeAttributes(self.eyebrowNode);
     };
 
     Eyebrow.prototype._createEyebrowNode = function () {

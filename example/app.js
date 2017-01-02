@@ -1,6 +1,6 @@
 require.config({
     paths: {
-        "eyes": "eyes/dist/eyes",
+        "eyes": "eyes/dist/eyes.min",
         "jquery": "bower_components/jquery/dist/jquery.min"
     },
     waitSeconds: 15
@@ -44,8 +44,53 @@ require(['eyes', 'jquery'], function (Eyes) {
         var headerEyes = eyes.createEyesPair('#header-eyes', headerEyesOptions, {x: 75, y:0}, 50);
 
         window.addEventListener("mousemove", function (e) {
-            headerEyes.getLeftEye().eyeball.track({x: e.x, y: e.y});
-            headerEyes.getRightEye().eyeball.track({x: e.x, y: e.y});
+            var leftEye = headerEyes.getLeftEye();
+            var rightEye = headerEyes.getRightEye();
+
+            leftEye.eyeball.track({x: e.x, y: e.y});
+            rightEye.eyeball.track({x: e.x, y: e.y});
+
+            //get distance
+            var leftEyeCoordinates = leftEye.getCoordinates();
+            var rightEyeCoordinates = rightEye.getCoordinates();
+            var center = {
+                x: (leftEyeCoordinates.x + rightEyeCoordinates.x)/2,
+                y: (leftEyeCoordinates.y + rightEyeCoordinates.y)/2
+            };
+            var d = Math.pow(Math.pow(center.x - e.x, 2) + Math.pow(center.y - e.y, 2), 0.5);
+            //get rotation
+            var border = 750;
+            var coef = d/border;
+            var rotate = -30 + 60*coef;
+            var topEyelid = (1-coef) * 0.33;
+            //set rotation
+            var leftOptions = {
+                topEyelid: {
+                    size: topEyelid
+                },
+                bottomEyelid: {
+                    size: topEyelid
+                },
+                eyebrow: {
+                    //eyebrow angle, from -30 to 30
+                    rotate: -rotate
+                }
+            };
+            var rightOptions = {
+                topEyelid: {
+                    size: topEyelid
+                },
+                bottomEyelid: {
+                    size: topEyelid
+                },
+                eyebrow: {
+                    //eyebrow angle, from -30 to 30
+                    rotate: rotate
+                }
+            };
+
+            leftEye.change(leftOptions);
+            rightEye.change(rightOptions);
         }, false);
 
         var firstEye = eyes.createEye(
