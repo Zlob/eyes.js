@@ -46,7 +46,7 @@ define(function() {
         this.options.borderColor = options.borderColor || this.options.borderColor;
         this.options.borderSize = options.borderSize || this.options.borderSize;
         this.options.eyelashesStyle = options.eyelashesStyle || this.options.eyelashesStyle;
-        this.options.bottomArcRadiusSweep = options.bottomArcRadiusSweep || this.options.bottomArcRadiusSweep;
+        this.options.bottomArcRadiusSweep = options.bottomArcRadiusSweep != undefined ? options.bottomArcRadiusSweep : this.options.bottomArcRadiusSweep;
         this._setRotate(options.rotate || this.options.rotate);
         this._setBottomArcRadius(options.bottomArcRadius || this.options.bottomArcRadius);
         this._setSize(options.size || this.options.size);   

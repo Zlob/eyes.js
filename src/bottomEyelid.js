@@ -40,7 +40,7 @@ define(function() {
         this.options.color = options.color || this.options.color;
         this.options.borderColor = options.borderColor || this.options.borderColor;
         this.options.borderSize = options.borderSize || this.options.borderSize;
-        this.options.topArcRadiusSweep = options.topArcRadiusSweep || this.options.topArcRadiusSweep;
+        this.options.topArcRadiusSweep = options.topArcRadiusSweep != undefined ? options.topArcRadiusSweep : this.options.topArcRadiusSweep;
         this._setRotate(options.rotate || this.options.rotate);
         this._setTopArcRadius(options.topArcRadius || this.options.topArcRadius);
         this._setSize(options.size || this.options.size);   

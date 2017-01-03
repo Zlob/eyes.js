@@ -47,7 +47,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 borderSize             : 5,
                 bottomArcRadius        : 0,
                 bottomArcRadiusSweep   : 0,
-                rotate                 : 0,
+                rotate                 : 0, //eyelid angle, from -30 to 30
                 eyelashesStyle         : 'none'
             },
             //bottom eyelid options
@@ -58,7 +58,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 borderSize             : 5,
                 topArcRadius           : 0,
                 topArcRadiusSweep      : 0,
-                rotate                 : 0
+                rotate                 : 0  //eyelid angle, from -30 to 30
             },
             eyebrow: {
                 width                   : 80,
@@ -67,8 +67,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 color                   : '#000000',
                 borderColor             : '#000000',
                 borderSize              : 0,
-                //eyebrow angle, from -30 to 30
-                rotate                  : 0
+                rotate                  : 0    //eyebrow angle, from -30 to 30
             }
         };
 
@@ -117,6 +116,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
             }
         }
         this._setNodeAttributes(this._eyeNode);
+        this.moveToPosition();
     };
 
     Eye.prototype.getCoordinates = function () {

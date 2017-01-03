@@ -22,7 +22,7 @@ define(function() {
     
     Eyeball.prototype.track  = function (options) {
         if(options.angle){
-            this._trackByAngle(options.angle, options.shift);
+            this.trackByAngle(options.angle, options.shift);
         }
         else if(options.x && options.y){
             this.trackByCoordinate(options.x, options.y, options.shift)
@@ -72,7 +72,7 @@ define(function() {
         return eyeballPath;
     };
     
-    Eyeball.prototype._trackByAngle = function (angle, shift) {
+    Eyeball.prototype.trackByAngle = function (angle, shift) {
         shift = shift || this.options['shift'];
                 
         var x = 90 + shift * Math.cos(angle);
