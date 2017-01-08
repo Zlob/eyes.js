@@ -164,10 +164,10 @@ require(
                 min: 0,
                 max: 190,
                 step: 1,
-                value: 23,
+                value: 21,
                 slide: function( event, ui ) {
                     leftDemoEye.change({x: ui.value});
-                },
+                }
             });
 
             $("#left-y").slider({
@@ -177,7 +177,7 @@ require(
                 value: 20,
                 slide: function( event, ui ) {
                     leftDemoEye.change({y: ui.value});
-                },
+                }
             });
             $("#left-size").slider({
                 min: 0,
@@ -186,7 +186,7 @@ require(
                 value: 50,
                 slide: function( event, ui ) {
                     leftDemoEye.change({size: ui.value});
-                },
+                }
             });
 
             $("#left-bottom-eyelid-size").slider({
@@ -196,7 +196,7 @@ require(
                 value: 0.5,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {size: ui.value}});
-                },
+                }
             });
 
             $("#left-bottom-eyelid-topArcRadius").slider({
@@ -206,7 +206,7 @@ require(
                 value: 0.1,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {topArcRadius: ui.value}});
-                },
+                }
             });
 
             $("#left-bottom-eyelid-topArcRadiusSweep").slider({
@@ -216,7 +216,7 @@ require(
                 value: 1,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {topArcRadiusSweep: ui.value}});
-                },
+                }
             });
 
             $("#left-bottom-eyelid-rotate").slider({
@@ -226,7 +226,7 @@ require(
                 value: 0,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {rotate: ui.value}});
-                },
+                }
             });
 
             $("#right-eyeball-size").slider({
@@ -236,7 +236,7 @@ require(
                 value: 12,
                 slide: function( event, ui ) {
                     rightDemoEye.change({eyeball: {size: ui.value}});
-                },
+                }
             });
 
             $("#right-eyeball-shift").slider({
@@ -246,7 +246,7 @@ require(
                 value: 20,
                 slide: function( event, ui ) {
                     rightDemoEye.change({eyeball: {shift: ui.value}});
-                },
+                }
             });
 
             $("#right-eyeball-angle").slider({
@@ -256,17 +256,17 @@ require(
                 value: 0.1,
                 slide: function( event, ui ) {
                     rightDemoEye.eyeball.trackByAngle(ui.value);
-                },
+                }
             });
 
             $("#right-topeyelid-size").slider({
                 min: 0,
                 max: 1,
                 step: 0.01,
-                value: 0.1,
+                value: 0.3,
                 slide: function( event, ui ) {
                     rightDemoEye.change({topEyelid: {size: ui.value}});
-                },
+                }
             });
 
             $("#right-topeyelid-bottomArcRadius").slider({
@@ -276,7 +276,7 @@ require(
                 value: 0.1,
                 slide: function( event, ui ) {
                     rightDemoEye.change({topEyelid: {bottomArcRadius: ui.value}});
-                },
+                }
             });
 
             $("#right-topeyelid-bottomArcRadiusSweep").slider({
@@ -286,7 +286,7 @@ require(
                 value: 1,
                 slide: function( event, ui ) {
                     rightDemoEye.change({topEyelid: {bottomArcRadiusSweep: ui.value}});
-                },
+                }
             });
 
             $("#right-topeyelid-rotate").slider({
@@ -296,10 +296,11 @@ require(
                 value: 0,
                 slide: function( event, ui ) {
                     rightDemoEye.change({topEyelid: {rotate: ui.value}});
-                },
+                }
             });
 
-
+            leftDemoEye.moveToPosition();
+            rightDemoEye.moveToPosition();
 
 
 
