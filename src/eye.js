@@ -36,7 +36,8 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
             //eyeball options
             eyeball: {
                 size     : 12,
-                shift    : 20
+                shift    : 20,
+                rotate     : 3.14 //from 0 to 2*PI
             },
             //top eyelid options
             topEyelid: {

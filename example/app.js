@@ -49,8 +49,8 @@ require(
                 var leftEye = headerEyes.getLeftEye();
                 var rightEye = headerEyes.getRightEye();
 
-                leftEye.eyeball.track({x: e.x, y: e.y});
-                rightEye.eyeball.track({x: e.x, y: e.y});
+                leftEye.eyeball.trackByCoordinate(e.x, e.y);
+                rightEye.eyeball.trackByCoordinate(e.x, e.y);
 
                 //get distance
                 var leftEyeCoordinates = leftEye.getCoordinates();
@@ -251,11 +251,11 @@ require(
 
             $("#right-eyeball-angle").slider({
                 min: 0,
-                max: 6.24,
+                max: 6.28,
                 step: 0.1,
                 value: 0.1,
                 slide: function( event, ui ) {
-                    rightDemoEye.eyeball.trackByAngle(ui.value);
+                    rightDemoEye.change({eyeball: {rotate: ui.value}});
                 }
             });
 
