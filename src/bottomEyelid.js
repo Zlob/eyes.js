@@ -32,14 +32,22 @@ define(function() {
     };
     
     BottomEyelid.prototype._setOptions = function (options) {
-        // Replace default optinos
-        this.options.color = options.color || this.options.color;
-        this.options.borderColor = options.borderColor || this.options.borderColor;
-        this.options.borderSize = options.borderSize || this.options.borderSize;
-        this.options.topArcRadiusSweep = options.topArcRadiusSweep != undefined ? options.topArcRadiusSweep : this.options.topArcRadiusSweep;
-        this._setRotate(options.rotate || this.options.rotate);
-        this._setTopArcRadius(options.topArcRadius || this.options.topArcRadius);
-        this._setSize(options.size || this.options.size);   
+        // Replace default options
+        this.options.color = this._chooseOption(options, 'color');
+        this.options.borderColor = this._chooseOption(options, 'borderColor');
+        this.options.borderSize = this._chooseOption(options, 'borderSize');
+        this.options.topArcRadiusSweep = this._chooseOption(options, 'topArcRadiusSweep');
+        this._setRotate(this._chooseOption(options, 'rotate'));
+        this._setTopArcRadius(this._chooseOption(options, 'topArcRadius'));
+        this._setSize(this._chooseOption(options, 'size'));
+    };
+
+    BottomEyelid.prototype._chooseOption = function (options, optionName) {
+        if (options[optionName] != undefined) {
+            return options[optionName];
+        } else {
+            return this.options[optionName];
+        }
     };
     
     BottomEyelid.prototype._render = function () {

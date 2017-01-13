@@ -19,13 +19,21 @@ define(function(){
    };
 
     Eyebrow.prototype._setOptions = function (options) {
-        // Replace default optinos
-        this.options.width = options.width || this.options.width;
-        this.options.height = options.height || this.options.height;
-        this.options.color = options.color || this.options.color;
-        this.options.borderColor = options.borderColor || this.options.borderColor;
-        this.options.borderSize = options.borderSize || this.options.borderSize;
-        this._setRotate(options.rotate || this.options.rotate);
+        // Replace default options
+        this.options.width = this._chooseOption(options, 'width');
+        this.options.height = this._chooseOption(options, 'height');
+        this.options.color = this._chooseOption(options, 'color');
+        this.options.borderColor = this._chooseOption(options, 'borderColor');
+        this.options.borderSize = this._chooseOption(options, 'borderSize');
+        this._setRotate(this._chooseOption(options, 'rotate'));
+    };
+
+    Eyebrow.prototype._chooseOption = function (options, optionName) {
+        if (options[optionName] != undefined) {
+            return options[optionName];
+        } else {
+            return this.options[optionName];
+        }
     };
 
     Eyebrow.prototype._setRotate = function (param) {

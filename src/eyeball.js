@@ -22,8 +22,16 @@ define(function() {
     };
 
     Eyeball.prototype._setOptions = function (options) {
-        for( var key in options ) {
-            this.options[key] = options[key];
+        this.options.size = this._chooseOption(options, 'size');
+        this.options.shift = this._chooseOption(options, 'shift');
+        this.options.rotate = this._chooseOption(options, 'rotate');
+    };
+
+    Eyeball.prototype._chooseOption = function (options, optionName) {
+        if (options[optionName] != undefined) {
+            return options[optionName];
+        } else {
+            return this.options[optionName];
         }
     };
 
