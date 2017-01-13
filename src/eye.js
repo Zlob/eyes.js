@@ -41,7 +41,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
             },
             //top eyelid options
             topEyelid: {
-                size                   : 0,
+                size                   : 0, //from 0 when open to 1 when closed
                 color                  : "white",
                 borderColor            : "#000000",
                 borderSize             : 5,
@@ -52,7 +52,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
             },
             //bottom eyelid options
             bottomEyelid: {
-                size                   : 0,
+                size                   : 0, //from 0 when open to 1 when closed
                 color                  : "white",
                 borderColor            : "#000000",
                 borderSize             : 5,

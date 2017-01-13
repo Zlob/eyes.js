@@ -11,17 +11,13 @@ define(function() {
         this.parent = parent;
         
         this.options = {
-            //from 0 when open to 1 when closed
-            size                    : 0,
-            color                   : 'white',
-            borderColor             : '#000000',
-            borderSize              : 5,
-            //from 0 to 1, 0 if straight, 1 if rounded
-            topArcRadius            : 0,
-            //arc direction, 0  or 1
-            topArcRadiusSweep       : 0,
-            //eyelid angle, from -30 to 30
-            rotate                  : 0
+            size                   : 0, //from 0 when open to 1 when closed
+            color                  : "white",
+            borderColor            : "#000000",
+            borderSize             : 5,
+            topArcRadius           : 0, //from 0 (straight line) to 1 (circle)
+            topArcRadiusSweep      : 0, //0 (if bottom arc of circle) or 1 (if top arc of circle)
+            rotate                 : 0  //eyelid angle, from -30 to 30
         };
                 
         this._setOptions(options);

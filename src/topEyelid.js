@@ -14,19 +14,14 @@ define(function() {
         this.type = type;
         
         this.options = {
-            //from 0 when open to 1 when closed
-            size                    : 0,  
-            color                   : 'white',
-            borderColor             : '#000000',
-            borderSize              : 5,
-            //from 0 to 1, 0 if straight, 1 if rounded
-            bottomArcRadius         : 0,
-            //arc direction, 0  or 1
-            bottomArcRadiusSweep    : 0,
-            //none or loise
-            eyelashesStyle          : 'none',
-            //eyelid angle, from -30 to 30
-            rotate                  : 0
+            size                   : 0, //from 0 when open to 1 when closed
+            color                  : "white",
+            borderColor            : "#000000",
+            borderSize             : 5,
+            bottomArcRadius        : 0, //from 0 (straight line) to 1 (circle)
+            bottomArcRadiusSweep   : 0, //0 (if top arc of circle) or 1 (if bottom arc of circle)
+            rotate                 : 0, //eyelid angle, from -30 to 30
+            eyelashesStyle         : 'none' //'none' (without eyelashes) or 'loise' (with eyelashes)
         };
                 
         this._setOptions(options);
