@@ -42,6 +42,12 @@ define(['eye'], function (Eye) {
         this.rightEye.moveToPosition();
     };
 
+    EyesPair.prototype.animate = function(options, duration) {
+        //todo return callback
+        this.leftEye.animate(options, duration);
+        this.rightEye.animate(options, duration);
+    };
+
 
     return EyesPair;
 });

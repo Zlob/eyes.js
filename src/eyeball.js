@@ -13,7 +13,8 @@ define(function() {
         
         this.options = {
             size       : 12,
-            shift      : 20
+            shift      : 20,
+            rotate     : 3.14 //from 0 to 2*PI
         };
 
         this._setOptions(options);
@@ -65,51 +66,28 @@ define(function() {
         eyeballPath.setAttribute("stroke-width", 5);
         eyeballPath.setAttribute("stroke-linejoin", null);
         eyeballPath.setAttribute("stroke-linecap", null);
-        eyeballPath.setAttribute("cx", 90 + parseInt(this.options["shift"]));
-        eyeballPath.setAttribute("cy", 90);
+        eyeballPath.setAttribute("cx", this._getEyeballXCoordinate());
+        eyeballPath.setAttribute("cy", this._getEyeballYCoordinate());
         eyeballPath.setAttribute("r", this.options["size"]);
 
         return eyeballPath;
     };
-    
-    Eyeball.prototype.trackByAngle = function (angle, shift) {
-        shift = shift || this.options['shift'];
-                
-        var x = 90 + shift * Math.cos(angle);
-        var y = 90 + shift * Math.sin(angle);
-        
-        this._setEyeballCoordinates(x,y);
-    };
-    
-    Eyeball.prototype.trackByCoordinate = function (x1, y1, shift) {
-        shift = shift || this.options['shift'];
-              
-        //eye center
-        var eyeCenter = this._getEyeballCoordinates();          
-           
-        //distance between eye center and point
-        var d = Math.sqrt(Math.pow(eyeCenter.x - x1, 2) + Math.pow(eyeCenter.y - y1, 2));
-        if (d <= shift) {
-            shift = d;
-        }
-        //eyeball position
-        var x = 90 - (eyeCenter.x - x1) / d * shift;
-        var y = 90 - (eyeCenter.y - y1) / d * shift;
 
-        this._setEyeballCoordinates(x,y);
+    Eyeball.prototype.trackByCoordinate = function (x1, y1) {
+        var eyeCenter = this.parent.getCoordinates();
+
+        var angle = Math.atan2(y1 - eyeCenter.y, x1 - eyeCenter.x);
+        this.change({
+            rotate  : angle
+        });
     };
-    
-    Eyeball.prototype._setEyeballCoordinates = function (x, y) {
-        var eyeballPath = this.eyeballNode.querySelector("[name=eyeball]");
-        eyeballPath.setAttribute("cx", x);
-        eyeballPath.setAttribute("cy", y)
+
+    Eyeball.prototype._getEyeballXCoordinate = function () {
+        return (90 + this.options["shift"] * Math.cos(this.options["rotate"]));
     };
-    
-    Eyeball.prototype._getEyeballCoordinates = function () {
-        var eyeballNodePosition = this.eyeballNode.getBoundingClientRect();
-        var x = eyeballNodePosition.left + eyeballNodePosition.width/2;
-        var y = eyeballNodePosition.top  + eyeballNodePosition.height/2;
-        return { x: x, y: y };
+
+    Eyeball.prototype._getEyeballYCoordinate = function () {
+        return (90 + this.options["shift"] * Math.sin(this.options["rotate"]));
     };
         
     return Eyeball;
