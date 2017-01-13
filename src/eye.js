@@ -76,7 +76,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
     };
 
     Eye.prototype._setOptions = function (options) {
-        // Replace default optinos
+        // Replace default options
         for( var key in options ) {
             this.options[key] = options[key];
         }
