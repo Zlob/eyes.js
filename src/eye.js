@@ -32,8 +32,7 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
             color         : "#FFFFFF",
             borderColor   : "#000000",
             borderSize    : 5,
-            //left or right eye
-            type          : 'left',
+            type          : 'left',     //left or right
             //eyeball options
             eyeball: {
                 size     : 12,
@@ -45,10 +44,10 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 color                  : "white",
                 borderColor            : "#000000",
                 borderSize             : 5,
-                bottomArcRadius        : 0,
-                bottomArcRadiusSweep   : 0,
+                bottomArcRadius        : 0, //from 0 (straight line) to 1 (circle)
+                bottomArcRadiusSweep   : 0, //0 (if top arc of circle) or 1 (if bottom arc of circle)
                 rotate                 : 0, //eyelid angle, from -30 to 30
-                eyelashesStyle         : 'none'
+                eyelashesStyle         : 'none' //'none' (without eyelashes) or 'loise' (with eyelashes)
             },
             //bottom eyelid options
             bottomEyelid: {
@@ -56,18 +55,18 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
                 color                  : "white",
                 borderColor            : "#000000",
                 borderSize             : 5,
-                topArcRadius           : 0,
-                topArcRadiusSweep      : 0,
+                topArcRadius           : 0, //from 0 (straight line) to 1 (circle)
+                topArcRadiusSweep      : 0, //0 (if bottom arc of circle) or 1 (if top arc of circle)
                 rotate                 : 0  //eyelid angle, from -30 to 30
             },
             eyebrow: {
                 width                   : 80,
                 height                  : 5,
-                position                : 0.5, //from 0 (very  top) to 1 (near eye)
+                position                : 0.5, //from 0 (very top) to 1 (near eye)
                 color                   : '#000000',
                 borderColor             : '#000000',
                 borderSize              : 0,
-                rotate                  : 0    //eyebrow angle, from -30 to 30
+                rotate                  : 0  //eyebrow angle, from -30 to 30
             }
         };
 
