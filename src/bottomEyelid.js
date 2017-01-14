@@ -114,7 +114,7 @@ define(['helper'], function(Helper) {
         if (this.options.topArcRadius != 0){
             //bottom arc
             var arcRadius = 50 / this.options.topArcRadius;
-            d = d + " A" + arcRadius + "," + arcRadius + " 0 0 " + this.options.topArcRadiusSweep;
+            d = d + " A" + arcRadius + "," + arcRadius + " 0 0 " + this._getRadiusSweep();
             //back to start point
             d = d + endPointX + "," + endPointY;
         }
@@ -132,6 +132,14 @@ define(['helper'], function(Helper) {
         //right end point
         d = d + endPointX + "," + endPointY;
         return d;
+    };
+
+    BottomEyelid.prototype._getRadiusSweep = function () {
+        if (this.options.topArcRadiusSweep <= 0.5) {
+            return 0;
+        } else {
+            return 1;
+        }
     };
 
     BottomEyelid.prototype.changeByDiff = function (diff) {

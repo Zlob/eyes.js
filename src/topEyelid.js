@@ -12,7 +12,7 @@ define(['helper'], function(Helper) {
             borderColor            : "#000000",
             borderSize             : 5,
             bottomArcRadius        : 0, //from 0 (straight line) to 1 (circle)
-            bottomArcRadiusSweep   : 0, //0 (if top arc of circle) or 1 (if bottom arc of circle)
+            bottomArcRadiusSweep   : 0, //from 0 to 0.5 (if top arc of circle) or from 0.5 to 1 (if bottom arc of circle)
             rotate                 : 0, //eyelid angle, from -30 to 30
             eyelashesStyle         : 'none' //'none' (without eyelashes) or 'loise' (with eyelashes)
         };
@@ -139,7 +139,7 @@ define(['helper'], function(Helper) {
         if (this.options.bottomArcRadius != 0){
             //bottom arc
             var arcRadius = 50 / this.options.bottomArcRadius;
-            d = d + " A" + arcRadius + "," + arcRadius + " 0 0 " + this.options.bottomArcRadiusSweep;
+            d = d + " A" + arcRadius + "," + arcRadius + " 0 0 " + this._getRadiusSweep();
             //back to start point
             d = d + " " + endPointX + "," + endPointY;
         }
@@ -181,6 +181,14 @@ define(['helper'], function(Helper) {
         //way back
         d += " Q" + centerX + "," + centerY + " " + startX + "," + startY + " ";
         return d;
+    };
+
+    TopEyelid.prototype._getRadiusSweep = function () {
+        if (this.options.bottomArcRadiusSweep <= 0.5) {
+            return 0;
+        } else {
+            return 1;
+        }
     };
 
     TopEyelid.prototype.changeByDiff = function (diff) {
