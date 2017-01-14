@@ -1,11 +1,4 @@
-/**
-* Created with EyeAnimator.
-* User: vamakin
-* Date: 2016-10-09
-* Time: 08:52 AM
-* To change this template use Tools | Templates.
-*/
-define(function() {
+define(['helper'], function(Helper) {
     
     var TopEyelid = function (parent, type, options) {
 
@@ -35,26 +28,18 @@ define(function() {
         self._setNodeAttributes(self.eyelidNode)
     };
     
-    TopEyelid.prototype._setOptions = function (options) {
+    TopEyelid.prototype._setOptions = function (newOptions) {
         // Replace default options
-        this.options.color = this._chooseOption(options, 'color');
-        this.options.borderColor = this._chooseOption(options, 'borderColor');
-        this.options.borderSize = this._chooseOption(options, 'borderSize');
-        this.options.eyelashesStyle = this._chooseOption(options, 'eyelashesStyle');
-        this.options.bottomArcRadiusSweep = this._chooseOption(options, 'bottomArcRadiusSweep');
-        this._setRotate(this._chooseOption(options, 'rotate'));
-        this._setBottomArcRadius(this._chooseOption(options, 'bottomArcRadius'));
-        this._setSize(this._chooseOption(options, 'size'));
+        this.options.color = Helper.chooseOption(this.options, newOptions, 'color');
+        this.options.borderColor = Helper.chooseOption(this.options, newOptions, 'borderColor');
+        this.options.borderSize = Helper.chooseOption(this.options, newOptions, 'borderSize');
+        this.options.eyelashesStyle = Helper.chooseOption(this.options, newOptions, 'eyelashesStyle');
+        this.options.bottomArcRadiusSweep = Helper.chooseOption(this.options, newOptions, 'bottomArcRadiusSweep');
+        this._setRotate(Helper.chooseOption(this.options, newOptions, 'rotate'));
+        this._setBottomArcRadius(Helper.chooseOption(this.options, newOptions, 'bottomArcRadius'));
+        this._setSize(Helper.chooseOption(this.options, newOptions, 'size'));
     };
 
-    TopEyelid.prototype._chooseOption = function (options, optionName) {
-        if (options[optionName] != undefined) {
-            return options[optionName];
-        } else {
-            return this.options[optionName];
-        }
-    };
-    
     TopEyelid.prototype._render = function () {
         this.eyelidNode = this._createEyelidNode();
         return this;
@@ -197,6 +182,14 @@ define(function() {
         d += " Q" + centerX + "," + centerY + " " + startX + "," + startY + " ";
         return d;
     };
-    
+
+    TopEyelid.prototype.changeByDiff = function (diff) {
+        var newOptions = {};
+        for (var key in diff) {
+            newOptions[key] = Helper.getCalculatedOption(this.options[key], diff[key]);
+        }
+        return newOptions;
+    };
+
     return TopEyelid;
 });

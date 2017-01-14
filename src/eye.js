@@ -1,11 +1,4 @@
-/**
-* Created with EyeAnimator.
-* User: vamakin
-* Date: 2016-10-08
-* Time: 03:52 PM
-* To change this template use Tools | Templates.
-*/
-define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, TopEyelid, BottomEyelid, Eyebrow) {
+define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow', 'helper'], function(Eyeball, TopEyelid, BottomEyelid, Eyebrow, Helper) {
     
     var SVG_HTML_TEMPLATE = [
         '<svg name="svg-node" width="50" height="50" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">',
@@ -71,6 +64,8 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
             }
         };
 
+        this.animationIntervalId = null;
+
         this._setOptions(options);
         this._render();
     };
@@ -117,6 +112,59 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow'], function(Eyeball, To
         }
         this._setNodeAttributes(this._eyeNode);
         this.moveToPosition();
+    };
+
+    Eye.prototype.changeByDiff = function (diff) {
+        var newOptions = {};
+        for (var key in diff) {
+            if (typeof diff[key] === 'object') {
+                newOptions[key] = this[key].changeByDiff(diff[key]);
+            } else {
+                newOptions[key] = Helper.getCalculatedOption(this.options[key], diff[key]);
+            }
+        }
+        this.change(newOptions);
+    };
+
+    Eye.prototype.animate = function (options, duration) {
+        var period = 10; //ms between changes;
+        var diff = this._getOptionsDiff(options, duration / period);
+        return this._startAnimation(diff, duration, period);
+    };
+
+    Eye.prototype.stopAnimation = function () {
+        var self = this;
+        clearInterval(self.animationIntervalId);
+    };
+
+    Eye.prototype._getOptionsDiff = function (options, duration) {
+        var diff = {};
+        for (var key in options) {
+            if (typeof options[key] === 'object') {
+                diff[key] = Helper.getOptionsDiff(this[key].options, options[key], duration);
+            } else {
+                diff[key] = Helper.getOptionDiff(this.options[key], options[key], duration);
+            }
+        }
+        return diff;
+    };
+
+    Eye.prototype._startAnimation = function (diff, duration, period) {
+        var self = this;
+        var counter = 0;
+        if (self.animationIntervalId) {
+            this.stopAnimation();
+        }
+        var internalAnimationIntervalId = setInterval(function () {
+            counter += period;
+            self.changeByDiff(diff);
+            if (counter >= duration) {
+                if (self.animationIntervalId == internalAnimationIntervalId) {
+                    self.stopAnimation();
+                }
+            }
+        }, period);
+        self.animationIntervalId = internalAnimationIntervalId;
     };
 
     Eye.prototype.getCoordinates = function () {

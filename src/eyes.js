@@ -1,10 +1,3 @@
-/**
-* Created with EyeAnimator.
-* User: vamakin
-* Date: 2016-10-08
-* Time: 05:22 PM
-* To change this template use Tools | Templates.
-*/
 define(['eye', 'eyesPair'], function(Eye, EyesPair) {
     
     var Eyes = function () {

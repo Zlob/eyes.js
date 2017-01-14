@@ -1,6 +1,3 @@
-/**
- * Created by Zloblin on 13.10.2016.
- */
 define(['eye'], function (Eye) {
 
     var EyesPair = function (selector, options, center, distance) {

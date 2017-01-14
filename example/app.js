@@ -16,6 +16,8 @@ require(
 
         createDemoEyes(eyes);
 
+        createAnimationDemoEyes(eyes);
+
         function createHeaderEyes(eyes) {
             var headerEyesOptions = {
                 size: 50,
@@ -301,10 +303,49 @@ require(
 
             leftDemoEye.moveToPosition();
             rightDemoEye.moveToPosition();
+        }
 
+        function createAnimationDemoEyes() {
+            var demoOptions = {
+                size: 55,
+                color: "white",
+                borderColor: "black",
+                borderSize: 6,
+                //eyeball options
+                eyeball: {
+                    size: 12,
+                    shift: 20
+                },
+                //top eyelid options
+                topEyelid: {
+                    color: "#f7b6a4",
+                    borderColor: "#000000",
+                    borderSize: 5,
+                    eyelashesStyle: 'loise'
+                },
+                //bottom eyelid options
+                bottomEyelid: {
+                    color: "#f7b6a4",
+                    borderColor: "#000000",
+                    borderSize: 5
+                },
+            };
 
-
-
+            var demoEyes = eyes.createEyesPair('#animations-demo-img', demoOptions, {x: 61, y: 18}, 40);
+            $('[data-type=animation]').on('click', function (e) {
+                var animationType = $(e.target).attr("data-value");
+                if (animationType == 'angry') {
+                    demoEyes.animate({
+                        // borderSize: 20,
+                        eyeball: {
+                            // size: 30,
+                            shift: 30,
+                            rotate: 6
+                        },
+                    }, 2000);
+                }
+                // console.log(animationType);
+            })
         }
     }
 );

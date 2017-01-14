@@ -1,4 +1,4 @@
-define(function(){
+define(['helper'], function(Helper) {
 
    var Eyebrow = function (parent, options) {
        this.parent = parent;
@@ -18,22 +18,14 @@ define(function(){
        this._render();
    };
 
-    Eyebrow.prototype._setOptions = function (options) {
+    Eyebrow.prototype._setOptions = function (newOptions) {
         // Replace default options
-        this.options.width = this._chooseOption(options, 'width');
-        this.options.height = this._chooseOption(options, 'height');
-        this.options.color = this._chooseOption(options, 'color');
-        this.options.borderColor = this._chooseOption(options, 'borderColor');
-        this.options.borderSize = this._chooseOption(options, 'borderSize');
-        this._setRotate(this._chooseOption(options, 'rotate'));
-    };
-
-    Eyebrow.prototype._chooseOption = function (options, optionName) {
-        if (options[optionName] != undefined) {
-            return options[optionName];
-        } else {
-            return this.options[optionName];
-        }
+        this.options.width = Helper.chooseOption(this.options, newOptions, 'width');
+        this.options.height = Helper.chooseOption(this.options, newOptions, 'height');
+        this.options.color = Helper.chooseOption(this.options, newOptions, 'color');
+        this.options.borderColor = Helper.chooseOption(this.options, newOptions, 'borderColor');
+        this.options.borderSize = Helper.chooseOption(this.options, newOptions, 'borderSize');
+        this._setRotate(Helper.chooseOption(this.options, newOptions, 'rotate'));
     };
 
     Eyebrow.prototype._setRotate = function (param) {
@@ -89,5 +81,13 @@ define(function(){
         return (90 - 50 - h - borderSize) * position;
     };
 
-   return Eyebrow;
+    Eyebrow.prototype.changeByDiff = function (diff) {
+        var newOptions = {};
+        for (var key in diff) {
+            newOptions[key] = Helper.getCalculatedOption(this.options[key], diff[key]);
+        }
+        return newOptions;
+    };
+
+    return Eyebrow;
 });

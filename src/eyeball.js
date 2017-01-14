@@ -1,11 +1,4 @@
-/**
-* Created with EyeAnimator.
-* User: vamakin
-* Date: 2016-10-08
-* Time: 05:48 PM
-* To change this template use Tools | Templates.
-*/
-define(function() {
+define(['helper'], function(Helper) {
 
     var Eyeball = function (parent, options) {
                         
@@ -21,18 +14,10 @@ define(function() {
         this._render();
     };
 
-    Eyeball.prototype._setOptions = function (options) {
-        this.options.size = this._chooseOption(options, 'size');
-        this.options.shift = this._chooseOption(options, 'shift');
-        this.options.rotate = this._chooseOption(options, 'rotate');
-    };
-
-    Eyeball.prototype._chooseOption = function (options, optionName) {
-        if (options[optionName] != undefined) {
-            return options[optionName];
-        } else {
-            return this.options[optionName];
-        }
+    Eyeball.prototype._setOptions = function (newOptions) {
+        this.options.size = Helper.chooseOption(this.options, newOptions, 'size');
+        this.options.shift = Helper.chooseOption(this.options, newOptions, 'shift');
+        this.options.rotate = Helper.chooseOption(this.options, newOptions, 'rotate');
     };
 
     Eyeball.prototype._render = function () {
@@ -88,6 +73,14 @@ define(function() {
     Eyeball.prototype._getEyeballYCoordinate = function () {
         return (90 + this.options["shift"] * Math.sin(this.options["rotate"]));
     };
-        
+
+    Eyeball.prototype.changeByDiff = function (diff) {
+        var newOptions = {};
+        for (var key in diff) {
+            newOptions[key] = Helper.getCalculatedOption(this.options[key], diff[key]);
+        }
+        return newOptions;
+    };
+
     return Eyeball;
 });

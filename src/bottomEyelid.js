@@ -1,11 +1,4 @@
-/**
-* Created with EyeAnimator.
-* User: vamakin
-* Date: 2016-10-09
-* Time: 08:52 AM
-* To change this template use Tools | Templates.
-*/
-define(function() {
+define(['helper'], function(Helper) {
     
     var BottomEyelid = function (parent, options) {
         this.parent = parent;
@@ -31,24 +24,18 @@ define(function() {
         self._setNodeAttributes(self.eyelidNode)
     };
     
-    BottomEyelid.prototype._setOptions = function (options) {
+    BottomEyelid.prototype._setOptions = function (newOptions) {
         // Replace default options
-        this.options.color = this._chooseOption(options, 'color');
-        this.options.borderColor = this._chooseOption(options, 'borderColor');
-        this.options.borderSize = this._chooseOption(options, 'borderSize');
-        this.options.topArcRadiusSweep = this._chooseOption(options, 'topArcRadiusSweep');
-        this._setRotate(this._chooseOption(options, 'rotate'));
-        this._setTopArcRadius(this._chooseOption(options, 'topArcRadius'));
-        this._setSize(this._chooseOption(options, 'size'));
+        this.options.color = Helper.chooseOption(this.options, newOptions, 'color');
+        this.options.borderColor = Helper.chooseOption(this.options, newOptions, 'borderColor');
+        this.options.borderSize = Helper.chooseOption(this.options, newOptions, 'borderSize');
+        this.options.topArcRadiusSweep = Helper.chooseOption(this.options, newOptions, 'topArcRadiusSweep');
+        this._setRotate(Helper.chooseOption(this.options, newOptions, 'rotate'));
+        this._setTopArcRadius(Helper.chooseOption(this.options, newOptions, 'topArcRadius'));
+        this._setSize(Helper.chooseOption(this.options, newOptions, 'size'));
     };
 
-    BottomEyelid.prototype._chooseOption = function (options, optionName) {
-        if (options[optionName] != undefined) {
-            return options[optionName];
-        } else {
-            return this.options[optionName];
-        }
-    };
+
     
     BottomEyelid.prototype._render = function () {
         this.eyelidNode = this._createEyelidNode();
@@ -146,6 +133,14 @@ define(function() {
         d = d + endPointX + "," + endPointY;
         return d;
     };
-    
+
+    BottomEyelid.prototype.changeByDiff = function (diff) {
+        var newOptions = {};
+        for (var key in diff) {
+            newOptions[key] = Helper.getCalculatedOption(this.options[key], diff[key]);
+        }
+        return newOptions;
+    };
+
     return BottomEyelid;
 });
