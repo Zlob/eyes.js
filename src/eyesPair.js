@@ -40,9 +40,10 @@ define(['eye'], function (Eye) {
     };
 
     EyesPair.prototype.animate = function(options, duration) {
-        //todo return callback
-        this.leftEye.animate(options, duration);
-        this.rightEye.animate(options, duration);
+        return {
+            leftEyeAnimation : this.leftEye.animate(options, duration),
+            rightEyeAnimation : this.rightEye.animate(options, duration)
+        };
     };
 
 

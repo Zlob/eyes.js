@@ -155,16 +155,21 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow', 'helper'], function(E
         if (self.animationIntervalId) {
             this.stopAnimation();
         }
-        var internalAnimationIntervalId = setInterval(function () {
-            counter += period;
-            self.changeByDiff(diff);
-            if (counter >= duration) {
-                if (self.animationIntervalId == internalAnimationIntervalId) {
-                    self.stopAnimation();
+        var promise = new Promise(function (resolve, reject) {
+            var internalAnimationIntervalId = setInterval(function () {
+                counter += period;
+                self.changeByDiff(diff);
+                if (counter >= duration) {
+                    if (self.animationIntervalId == internalAnimationIntervalId) {
+                        self.stopAnimation();
+                        resolve();
+                    }
                 }
-            }
-        }, period);
-        self.animationIntervalId = internalAnimationIntervalId;
+            }, period);
+            self.animationIntervalId = internalAnimationIntervalId;
+        });
+
+        return promise;
     };
 
     Eye.prototype.getCoordinates = function () {
