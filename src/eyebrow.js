@@ -26,6 +26,7 @@ define(['helper'], function(Helper) {
         this.options.color = Helper.chooseOption(this.options, newOptions, 'color');
         this.options.borderColor = Helper.chooseOption(this.options, newOptions, 'borderColor');
         this.options.borderSize = Helper.chooseOption(this.options, newOptions, 'borderSize');
+        this.options.position = Helper.chooseOption(this.options, newOptions, 'position');
         this._setRotate(Helper.chooseOption(this.options, newOptions, 'rotate'));
     };
 
