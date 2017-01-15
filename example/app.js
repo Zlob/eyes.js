@@ -85,14 +85,14 @@ require(
                 var rightOptions = {
                     topEyelid: {
                         size: topEyelid,
-                        rotate: rotate / 2
+                        rotate: -rotate / 2
                     },
                     bottomEyelid: {
                         size: topEyelid,
-                        rotate: -rotate / 2
+                        rotate: rotate / 2
                     },
                     eyebrow: {
-                        rotate: rotate
+                        rotate: -rotate
                     }
                 };
 
