@@ -51,5 +51,123 @@ define(['eye'], function (Eye) {
         this.rightEye.stopAnimation();
     };
 
+    EyesPair.prototype.emote = function(type, duration) {
+        duration = duration || 1000;
+        if (type == 'angry') {
+            var options = {
+                eyeball: {
+                    rotate: 3.14
+                },
+                topEyelid: {
+                    size: 0.3,
+                    rotate: 20,
+                    bottomArcRadiusSweep: 1,
+                    bottomArcRadius: 0
+                },
+                bottomEyelid: {
+                    size: 0.3,
+                    rotate: -20,
+                    topArcRadius: 0,
+                    topArcRadiusSweep: 0
+                },
+                eyebrow: {
+                    position: 0.8,
+                    rotate: 20
+                }
+            };
+            this.animate(options, duration);
+        } else if (type == 'suspecting') {
+            var options = {
+                eyeball: {
+                    rotate: 3.14
+                },
+                topEyelid: {
+                    size: 0.4,
+                    rotate: 0,
+                    bottomArcRadiusSweep: 1,
+                    bottomArcRadius: 0
+                },
+                bottomEyelid: {
+                    size: 0.4,
+                    rotate: 0,
+                    topArcRadius: 0,
+                    topArcRadiusSweep: 0
+                },
+                eyebrow: {
+                    position: 0.9,
+                    rotate: 0
+                }
+            };
+            this.animate(options, duration);
+        } else if (type == 'happy') {
+            var options = {
+                eyeball: {
+                    rotate: 3.14
+                },
+                topEyelid: {
+                    size: 0.4,
+                    rotate: 0,
+                    bottomArcRadiusSweep: 1,
+                    bottomArcRadius: 0.3
+                },
+                bottomEyelid: {
+                    size: 0.4,
+                    rotate: 0,
+                    topArcRadius: 0.3,
+                    topArcRadiusSweep: 0
+                },
+                eyebrow: {
+                    position: 0.5,
+                    rotate: 0
+                }
+            };
+            this.animate(options, duration);
+        } else if (type == 'tempting') {
+            var options = {
+                eyeball: {
+                    rotate: 3.14
+                },
+                topEyelid: {
+                    size: 0.4,
+                    rotate: 0,
+                    bottomArcRadiusSweep: 1,
+                    bottomArcRadius: 0.3
+                },
+                bottomEyelid: {
+                    size: 0,
+                    rotate: 0,
+                    topArcRadius: 0,
+                    topArcRadiusSweep: 0
+                },
+                eyebrow: {
+                    position: 0.5,
+                    rotate: 0
+                }
+            };
+            this.animate(options, duration);
+        } else if (type == 'sad') {
+            var options = {
+                eyeball: {
+                    rotate: 1.7
+                },
+                topEyelid: {
+                    size: 0.3,
+                    rotate: -20,
+                    bottomArcRadiusSweep: 1,
+                    bottomArcRadius: 0.5
+                },
+                bottomEyelid: {
+                    size: 0,
+                    rotate: 0
+                },
+                eyebrow: {
+                    position: 0.9,
+                    rotate: -20
+                }
+            };
+            this.animate(options, duration);
+        }
+    };
+
     return EyesPair;
 });
