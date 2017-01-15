@@ -94,7 +94,8 @@ define(['helper'], function(Helper) {
         eyelidPath.setAttribute("fill", this.options.color);
         eyelidPath.setAttribute("stroke", this.options.borderColor);
         eyelidPath.setAttribute("stroke-width", this.options.borderSize);
-        eyelidPath.setAttribute("transform", "rotate("+this.options.rotate + ", 90, 90)");
+        var rotate = this.parent.options.type == 'left' ? this.options.rotate : -this.options.rotate;
+        eyelidPath.setAttribute("transform", "rotate("+rotate + ", 90, 90)");
         var d = this._createPath();
         eyelidPath.setAttribute('d', d);
         return eyelidPath;

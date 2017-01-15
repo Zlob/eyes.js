@@ -74,7 +74,8 @@ define(['helper'], function(Helper) {
         eyebrowPath.setAttribute("stroke", this.options.borderColor);
         eyebrowPath.setAttribute("stroke-width", this.options.borderSize);
         eyebrowPath.setAttribute("fill", this.options.color);
-        eyebrowPath.setAttribute("transform", "rotate(" + this.options.rotate + ", 90, 90)");
+        var rotate = this.parent.options.type == 'left' ? this.options.rotate : -this.options.rotate;
+        eyebrowPath.setAttribute("transform", "rotate(" + rotate + ", 90, 90)");
         return eyebrowPath;
     };
 
