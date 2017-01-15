@@ -4,6 +4,7 @@ define(['helper'], function(Helper) {
        this.parent = parent;
 
        this.options = {
+           visibility              : 'visible',
            width                   : 80,
            height                  : 5,
            position                : 0.5, //from 0 (very top) to 1 (near eye)
@@ -61,20 +62,21 @@ define(['helper'], function(Helper) {
     };
 
     Eyebrow.prototype._setNodeAttributes = function (eyelidNode) {
-        var eyelidPath = eyelidNode.querySelector("[name=eyebrow]");
+        var eyebrowPath = eyelidNode.querySelector("[name=eyebrow]");
 
 
-        eyelidPath.setAttribute("width", this.options.width);
-        eyelidPath.setAttribute("height", this.options.height);
+        eyebrowPath.setAttribute("width", this.options.width);
+        eyebrowPath.setAttribute("height", this.options.height);
         var x = 90 - this.options.width / 2;
-        eyelidPath.setAttribute("x", x);
+        eyebrowPath.setAttribute("x", x);
         var y = this._getY(this.options.height, this.options.borderSize, this.options.position);
-        eyelidPath.setAttribute("y", y);
-        eyelidPath.setAttribute("stroke", this.options.borderColor);
-        eyelidPath.setAttribute("stroke-width", this.options.borderSize);
-        eyelidPath.setAttribute("fill", this.options.color);
-        eyelidPath.setAttribute("transform", "rotate(" + this.options.rotate + ", 90, 90)");
-        return eyelidPath;
+        eyebrowPath.setAttribute("y", y);
+        eyebrowPath.setAttribute("stroke", this.options.borderColor);
+        eyebrowPath.setAttribute("stroke-width", this.options.borderSize);
+        eyebrowPath.setAttribute("fill", this.options.color);
+        eyebrowPath.setAttribute("transform", "rotate(" + this.options.rotate + ", 90, 90)");
+        eyebrowPath.setAttribute("visibility", this.options.visibility);
+        return eyebrowPath;
     };
 
     Eyebrow.prototype._getY = function (h, borderSize, position)  {
