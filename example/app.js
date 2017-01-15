@@ -117,187 +117,218 @@ require(
                     color: "#f7b6a4",
                     borderColor: "#000000",
                     borderSize: 5,
-                    eyelashesStyle: 'loise'
+                    eyelashesStyle: 'loise',
+                    size: 0.2
                 },
                 //bottom eyelid options
                 bottomEyelid: {
                     color: "#f7b6a4",
                     borderColor: "#000000",
-                    borderSize: 5
-                },
+                    borderSize: 5,
+                    size: 0.2
+                }
             };
 
             var demoEyes = eyes.createEyesPair('#demo-img', demoOptions, {x: 61, y: 18}, 40);
 
             var leftDemoEye = demoEyes.getLeftEye();
             var rightDemoEye = demoEyes.getRightEye();
-            leftDemoEye.change({
-                topEyelid: {
-                    size: 0.5,
-                    bottomArcRadius: 0.3,
-                    bottomArcRadiusSweep: 0
-                },
-                //bottom eyelid options
-                bottomEyelid: {
-                    size: 0.5,
-                    topArcRadius: 0.3,
-                    topArcRadiusSweep: 1
-                },
-                eyebrow: {
-                    rotate: -20
-                }
-            });
-            rightDemoEye.change({
-                topEyelid: {
-                    size: 0.3,
-                    bottomArcRadius: 0,
-                    bottomArcRadiusSweep: 0
-                },
-                bottomEyelid: {
-                    topArcRadius: 0,
-                    topArcRadiusSweep: 0
-                },
-                eyebrow: {
-                    rotate: 20
-                }
-            });
 
-            $("#left-x").slider({
+
+            $("#x").slider({
                 min: 0,
                 max: 190,
                 step: 1,
                 value: 21,
                 slide: function( event, ui ) {
                     leftDemoEye.change({x: ui.value});
+                    rightDemoEye.change({x: ui.value + 40});
                 }
             });
 
-            $("#left-y").slider({
+            $("#y").slider({
                 min: 0,
                 max: 190,
                 step: 1,
                 value: 20,
                 slide: function( event, ui ) {
                     leftDemoEye.change({y: ui.value});
+                    rightDemoEye.change({y: ui.value});
                 }
             });
-            $("#left-size").slider({
+            $("#size").slider({
                 min: 0,
                 max: 100,
                 step: 1,
                 value: 50,
                 slide: function( event, ui ) {
                     leftDemoEye.change({size: ui.value});
+                    rightDemoEye.change({size: ui.value});
                 }
             });
 
-            $("#left-bottom-eyelid-size").slider({
+            $("#bottom-eyelid-size").slider({
                 min: 0,
                 max: 1,
                 step: 0.01,
                 value: 0.5,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {size: ui.value}});
+                    rightDemoEye.change({bottomEyelid: {size: ui.value}});
                 }
             });
 
-            $("#left-bottom-eyelid-topArcRadius").slider({
+            $("#bottom-eyelid-topArcRadius").slider({
                 min: 0,
                 max: 1,
                 step: 0.01,
                 value: 0.1,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {topArcRadius: ui.value}});
+                    rightDemoEye.change({bottomEyelid: {topArcRadius: ui.value}});
                 }
             });
 
-            $("#left-bottom-eyelid-topArcRadiusSweep").slider({
+            $("#bottom-eyelid-topArcRadiusSweep").slider({
                 min: 0,
                 max: 1,
                 step: 1,
                 value: 1,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {topArcRadiusSweep: ui.value}});
+                    rightDemoEye.change({bottomEyelid: {topArcRadiusSweep: ui.value}});
                 }
             });
 
-            $("#left-bottom-eyelid-rotate").slider({
+            $("#bottom-eyelid-rotate").slider({
                 min: -30,
                 max: 30,
                 step: 0.1,
                 value: 0,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {rotate: ui.value}});
+                    rightDemoEye.change({bottomEyelid: {rotate: -ui.value}});
                 }
             });
 
-            $("#right-eyeball-size").slider({
+            $("#eyeball-size").slider({
                 min: 1,
                 max: 20,
                 step: 1,
                 value: 12,
                 slide: function( event, ui ) {
+                    leftDemoEye.change({eyeball: {size: ui.value}});
                     rightDemoEye.change({eyeball: {size: ui.value}});
                 }
             });
 
-            $("#right-eyeball-shift").slider({
+            $("#eyeball-shift").slider({
                 min: 1,
                 max: 30,
                 step: 1,
                 value: 20,
                 slide: function( event, ui ) {
+                    leftDemoEye.change({eyeball: {shift: ui.value}});
                     rightDemoEye.change({eyeball: {shift: ui.value}});
                 }
             });
 
-            $("#right-eyeball-angle").slider({
+            $("#eyeball-angle").slider({
                 min: 0,
                 max: 6.28,
                 step: 0.1,
                 value: 0.1,
                 slide: function( event, ui ) {
+                    leftDemoEye.change({eyeball: {rotate: ui.value}});
                     rightDemoEye.change({eyeball: {rotate: ui.value}});
                 }
             });
 
-            $("#right-topeyelid-size").slider({
+            $("#topeyelid-size").slider({
                 min: 0,
                 max: 1,
                 step: 0.01,
                 value: 0.3,
                 slide: function( event, ui ) {
+                    leftDemoEye.change({topEyelid: {size: ui.value}});
                     rightDemoEye.change({topEyelid: {size: ui.value}});
                 }
             });
 
-            $("#right-topeyelid-bottomArcRadius").slider({
+            $("#topeyelid-bottomArcRadius").slider({
                 min: 0,
                 max: 1,
                 step: 0.01,
                 value: 0.1,
                 slide: function( event, ui ) {
+                    leftDemoEye.change({topEyelid: {bottomArcRadius: ui.value}});
                     rightDemoEye.change({topEyelid: {bottomArcRadius: ui.value}});
                 }
             });
 
-            $("#right-topeyelid-bottomArcRadiusSweep").slider({
+            $("#topeyelid-bottomArcRadiusSweep").slider({
                 min: 0,
                 max: 1,
                 step: 1,
                 value: 1,
                 slide: function( event, ui ) {
+                    leftDemoEye.change({topEyelid: {bottomArcRadiusSweep: ui.value}});
                     rightDemoEye.change({topEyelid: {bottomArcRadiusSweep: ui.value}});
                 }
             });
 
-            $("#right-topeyelid-rotate").slider({
+            $("#topeyelid-rotate").slider({
                 min: -30,
                 max: 30,
                 step: 0.1,
                 value: 0,
                 slide: function( event, ui ) {
-                    rightDemoEye.change({topEyelid: {rotate: ui.value}});
+                    leftDemoEye.change({topEyelid: {rotate: ui.value}});
+                    rightDemoEye.change({topEyelid: {rotate: -ui.value}});
+                }
+            });
+
+            $("#eyebrow-width").slider({
+                min: 0,
+                max: 100,
+                step: 1,
+                value: 80,
+                slide: function( event, ui ) {
+                    leftDemoEye.change({eyebrow: {width: ui.value}});
+                    rightDemoEye.change({eyebrow: {width: ui.value}});
+                }
+            });
+
+            $("#eyebrow-height").slider({
+                min: 0,
+                max: 25,
+                step: 1,
+                value: 5,
+                slide: function( event, ui ) {
+                    leftDemoEye.change({eyebrow: {height: ui.value}});
+                    rightDemoEye.change({eyebrow: {height: ui.value}});
+                }
+            });
+
+            $("#eyebrow-position").slider({
+                min: 0,
+                max: 1,
+                step: 0.1,
+                value: 0.5,
+                slide: function( event, ui ) {
+                    leftDemoEye.change({eyebrow: {position: ui.value}});
+                    rightDemoEye.change({eyebrow: {position: ui.value}});
+                }
+            });
+
+            $("#eyebrow-rotate").slider({
+                min: -30,
+                max: 30,
+                step: 1,
+                value: 0,
+                slide: function( event, ui ) {
+                    leftDemoEye.change({eyebrow: {rotate: ui.value}});
+                    rightDemoEye.change({eyebrow: {rotate: -ui.value}});
                 }
             });
 
