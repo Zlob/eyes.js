@@ -46,6 +46,10 @@ define(['eye'], function (Eye) {
         };
     };
 
+    EyesPair.prototype.stopAnimation = function() {
+        this.leftEye.stopAnimation();
+        this.rightEye.stopAnimation();
+    };
 
     return EyesPair;
 });
