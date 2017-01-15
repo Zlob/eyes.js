@@ -54,7 +54,6 @@ define(['eyeball', 'topEyelid', 'bottomEyelid', 'eyebrow', 'helper'], function(E
                 rotate                 : 0  //eyelid angle, from -30 to 30
             },
             eyebrow: {
-                show                    : 'visible',
                 width                   : 80,
                 height                  : 5,
                 position                : 0.5, //from 0 (very top) to 1 (near eye)

@@ -4,7 +4,6 @@ define(['helper'], function(Helper) {
        this.parent = parent;
 
        this.options = {
-           visibility              : 'visible',
            width                   : 80,
            height                  : 5,
            position                : 0.5, //from 0 (very top) to 1 (near eye)
@@ -76,7 +75,6 @@ define(['helper'], function(Helper) {
         eyebrowPath.setAttribute("stroke-width", this.options.borderSize);
         eyebrowPath.setAttribute("fill", this.options.color);
         eyebrowPath.setAttribute("transform", "rotate(" + this.options.rotate + ", 90, 90)");
-        eyebrowPath.setAttribute("visibility", this.options.visibility);
         return eyebrowPath;
     };
 
