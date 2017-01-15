@@ -207,7 +207,7 @@ require(
                 value: 0,
                 slide: function( event, ui ) {
                     leftDemoEye.change({bottomEyelid: {rotate: ui.value}});
-                    rightDemoEye.change({bottomEyelid: {rotate: -ui.value}});
+                    rightDemoEye.change({bottomEyelid: {rotate: ui.value}});
                 }
             });
 
@@ -284,7 +284,7 @@ require(
                 value: 0,
                 slide: function( event, ui ) {
                     leftDemoEye.change({topEyelid: {rotate: ui.value}});
-                    rightDemoEye.change({topEyelid: {rotate: -ui.value}});
+                    rightDemoEye.change({topEyelid: {rotate: ui.value}});
                 }
             });
 
@@ -328,7 +328,7 @@ require(
                 value: 0,
                 slide: function( event, ui ) {
                     leftDemoEye.change({eyebrow: {rotate: ui.value}});
-                    rightDemoEye.change({eyebrow: {rotate: -ui.value}});
+                    rightDemoEye.change({eyebrow: {rotate: ui.value}});
                 }
             });
 
@@ -365,17 +365,11 @@ require(
             var demoEyes = eyes.createEyesPair('#animations-demo-img', demoOptions, {x: 61, y: 18}, 40);
             $('[data-type=animation]').on('click', function (e) {
                 var animationType = $(e.target).attr("data-value");
-                if (animationType == 'angry') {
-                    demoEyes.animate({
-                        // borderSize: 20,
-                        eyeball: {
-                            // size: 30,
-                            shift: 30,
-                            rotate: 6
-                        },
-                    }, 2000);
-                }
-                // console.log(animationType);
+                demoEyes.emote(animationType, 1000);
+            });
+
+            $('[data-type=stop-animation]').on('click', function (e) {
+                demoEyes.stopAnimation();
             })
         }
     }
