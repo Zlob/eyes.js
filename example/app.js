@@ -365,7 +365,7 @@ require(
             var demoEyes = eyes.createEyesPair('#animations-demo-img', demoOptions, {x: 61, y: 18}, 40);
             $('[data-type=animation]').on('click', function (e) {
                 var animationType = $(e.target).attr("data-value");
-                demoEyes.emote(animationType, 1000);
+                demoEyes.emote(animationType, 500);
             });
 
             $('[data-type=stop-animation]').on('click', function (e) {
