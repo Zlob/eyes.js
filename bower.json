@@ -1,0 +1,24 @@
+{
+  "name": "eyes.js",
+  "description": "javascript library",
+  "main": "dist/amd/eyes.js",
+  "authors": [
+    "vamakin"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "eye",
+    "eyes",
+    "animation",
+    "emotions"
+  ],
+  "homepage": "https://github.com/Zlob/eyes.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
