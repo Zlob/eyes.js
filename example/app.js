@@ -11,13 +11,6 @@ require(
     ['eyes', 'jquery', 'jqueryUI'],
     function (Eyes) {
         var eyes = new Eyes();
-
-        createHeaderEyes(eyes);
-
-        createDemoEyes(eyes);
-
-        createAnimationDemoEyes(eyes);
-
         function createHeaderEyes(eyes) {
             var headerEyesOptions = {
                 size: 50,
@@ -372,5 +365,19 @@ require(
                 demoEyes.stopAnimation();
             })
         }
+
+        $( document ).ready(
+            function() {
+                createHeaderEyes(eyes);
+
+                createDemoEyes(eyes);
+
+                createAnimationDemoEyes(eyes);
+
+
+            }
+        );
+
+
     }
 );
