@@ -6,15 +6,24 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: "src",
                     name: "eyes",
-                    out: "dist/eyes.js"
+                    out: "dist/amd/eyes.js",
+                    'onModuleBundleComplete': function (data) {
+                        var fs = require('fs'),
+                            amdclean = require('amdclean'),
+                            outputFile = data.path;
+
+                        fs.writeFileSync("dist/global/eyes.js", amdclean.clean({
+                            'filePath': outputFile,
+                            'globalModules': ['eyes']}));
+                    }
                 }
             },
             minify: {
                 options: {
                     baseUrl: "src",
                     name: "eyes",
-                    out: "dist/eyes.min.js",
-                    optimize: "none",
+                    out: "dist/amd/eyes.min.js",
+                    optimize: "none"
                 }
             }
         },
@@ -22,10 +31,10 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     // includes files within path
-                    {expand: true, src: ['dist/**'], dest: 'example/eyes/'},
+                    {expand: true, src: ['dist/amd/**'], dest: 'example/eyes/'}
                 ],
             },
-        },
+        }
     });
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-copy');

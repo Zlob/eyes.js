@@ -10,6 +10,7 @@
     "grunt-contrib-requirejs": "^1.0.0"
   },
   "devDependencies": {
+    "amdclean": "^2.7.0",
     "bower": "^1.7.9",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
