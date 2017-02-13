@@ -366,18 +366,13 @@ require(
             })
         }
 
-        $( document ).ready(
-            function() {
+        $(window).on('load', function() {
                 createHeaderEyes(eyes);
 
                 createDemoEyes(eyes);
 
                 createAnimationDemoEyes(eyes);
-
-
             }
         );
-
-
     }
 );
