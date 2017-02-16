@@ -366,7 +366,7 @@ require(
             })
         }
 
-        $(window).on('load', function() {
+        $(document).ready(function() {
                 createHeaderEyes(eyes);
 
                 createDemoEyes(eyes);
